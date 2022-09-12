@@ -1,0 +1,14 @@
+[Unit]
+Description=BinkSFTPtoBlobStoragething
+Documentation=https://git.bink.com/DevOps/Cookbooks/fury
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/sftp
+ExecStart=/usr/bin/python3 /opt/sftp/uploader.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

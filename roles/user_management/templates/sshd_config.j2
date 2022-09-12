@@ -1,0 +1,76 @@
+PermitRootLogin no
+Port 22
+AddressFamily inet
+ListenAddress 0.0.0.0
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+Ciphers {{ ciphers }}
+MACs {{ macs }}
+KexAlgorithms {{ kexalgorithms }}
+
+Protocol 2
+StrictModes yes
+SyslogFacility AUTH
+LogLevel VERBOSE
+
+LoginGraceTime 30s
+MaxAuthTries 2
+MaxSessions 20
+MaxStartups 20:30:100
+
+PubkeyAuthentication yes
+
+IgnoreRhosts yes
+IgnoreUserKnownHosts yes
+HostbasedAuthentication no
+
+AuthenticationMethods publickey
+
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+
+GSSAPIAuthentication no
+GSSAPICleanupCredentials yes
+KerberosOrLocalPasswd no
+KerberosTicketCleanup yes
+KerberosAuthentication no
+UsePrivilegeSeparation sandbox
+UseLogin no
+UsePAM yes
+
+TCPKeepAlive no
+
+ClientAliveInterval 300
+ClientAliveCountMax 3
+
+PermitTunnel yes
+AllowTcpForwarding yes
+AllowAgentForwarding yes
+
+GatewayPorts no
+X11Forwarding no
+X11UseLocalhost yes
+
+PermitUserEnvironment no
+Compression yes
+UseDNS no
+PrintMotd no
+
+PrintLastLog no
+Banner none
+DebianBanner no
+
+Subsystem       sftp    /usr/lib/openssh/sftp-server
+
+{% for u in sftpusers %}
+Match User {{ u['name'] }}
+    ForceCommand internal-sftp
+    ChrootDirectory /home/{{ u['name'] }}
+    PermitTunnel no
+    AllowAgentForwarding no
+    AllowTcpForwarding no
+    X11Forwarding no
+{% endfor %}

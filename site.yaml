@@ -1,0 +1,11 @@
+- name: Fury
+  hosts: all
+  roles:
+    - { role: common, tags: [common] }
+    - { role: user_management, tags: [user_management] }
+
+# - name: Jarvis
+#   hosts: all
+#   roles:
+#     - { role: common, tags: [common] }
+#     - { role: prometheus, tags: [promethus] }

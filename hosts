@@ -1,0 +1,5 @@
+[all]
+46.101.20.166 ansible_connection=ssh ansible_user=root
+
+[sftp]
+46.101.20.166 ansible_connection=ssh ansible_user=root

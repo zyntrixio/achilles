@@ -1,0 +1,12 @@
+- name: sshd
+  service:
+    name: sshd
+    state: restarted
+
+- name: pysftp
+  service:
+    name: pysftp
+    state: restarted
+
+- name: Reload systemctl
+  command: systemctl daemon-reload

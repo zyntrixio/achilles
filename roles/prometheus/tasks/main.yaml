@@ -1,0 +1,46 @@
+- name: Remove 'node_exporter' package
+  apt:
+    name: prometheus-node-exporter
+    state: absent
+
+- name: Create node exporter group
+  group:
+    name: node_exporter
+    system: true
+    state: present
+
+- name: Create node_exporter user
+  user:
+    name: node_exporter
+    system: true
+    groups: node_exporter
+    shell: /usr/sbin/nologi
+
+- name: Create node_exporter dir
+  file:
+    path: /opt/node_exporter
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+
+- name: copy node_exporter file
+  get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+    dest: /opt/node_exporter/{{ node_exporter_version }}
+    owner: root
+    group: root
+    mode: '0755'
+    checksum: sha256:{{ node_exporter_checksum }}
+
+- name: Create symbolic link for node_exporter
+  file:
+    src: /usr/local/sbin/node_exporter
+    dest: /opt/node_exporter/{{ node_exporter_version }}
+    state: link
+  notify: node_exporter
+
+- name: Add node_exporter service file
+  template: src=sftp/pysftp.service dest=/etc/systemd/system/pysftp.service mode=0644
+  notify: reload systemctl
+

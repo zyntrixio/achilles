@@ -1,0 +1,12 @@
+{
+{% for u in sftpusers %}
+{% if 'upload' in u %}
+    "{{ u['name'] }}": {
+        "path": "/home/{{ u['name'] }}/uploads",
+        "dns": "{{ u['upload']['conn_string'] }}",
+        "container": "{{ u['upload']['container'] }}",
+        "slug": "scheme/{{ u['name'] }}"
+    {{ "}," if not loop.last else "}" }}
+{% endif %}
+{% endfor %}
+}

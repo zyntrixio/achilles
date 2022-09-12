@@ -1,0 +1,24 @@
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Add core packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - software-properties-common
+      - curl
+      - htop
+      - dstat
+      - screen
+      - zsh
+      - tcpdump
+      - nano
+      - vim
+      - openssh-server
+      - openssh-client
+      - libpam-google-authenticator
+
