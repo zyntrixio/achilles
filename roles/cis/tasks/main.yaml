@@ -1,0 +1,316 @@
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Add core packages
+  apt:
+    pkg:
+      - clamav
+      - clamav-daemon
+
+- name: check if disabled file_system file exists
+  stat: 
+    path: /etc/modprobe.d/disabled_filesystems.conf
+  register: disabled_file
+
+- name: create disabled file_system file
+  file:
+    path: /etc/modprobe.d/disabled_filesystems.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  when: disabled_file.stat.exists == false
+
+- name: check if dev-sec file exists
+  stat: 
+    path: /etc/modprobe.d/dev-sec.conf
+  register: dev_sec_file
+
+- name: create dev-sec file
+  file:
+    path: /etc/modprobe.d/dev-sec.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  when: dev_sec_file.stat.exists == false
+
+- name: Add lines to dev-conf
+  lineinfile:
+    dest: /etc/modprobe.d/dev-sec.conf
+    line: "install {{ item }} /bin/true"
+  with_items:
+    - cramfs
+    - freevxfs
+    - jffs2
+    - hfs
+    - hfsplus
+    - squashfs
+    - udf
+    - vfat
+
+- name: add mount line to fstab
+  lineinfile:
+    dest: /etc/fstab
+    line: tmpfs /dev/shm tmpfs nodev,nosuid,noexec 0
+
+- name: remount dev-shm
+  command: mount -o remount,nodev,nosuid,noexec /dev/shm
+
+- name: Get the list of services
+  service_facts:
+
+- name: disable service
+  service:
+    name: autofs
+    enabled: no
+  when: "'autofs.service' in services"
+
+- name: change mode of grub.cfg
+  file:
+    path: /boot/grub/grub.cfg
+    mode: '0400'
+
+- name: add hard limit to file
+  lineinfile:
+    dest: /etc/security/limits.conf
+    line: '* hard core 0'
+
+- name: add fs line to sysctl
+  lineinfile:
+    dest: /etc/sysctl.conf
+    line: "{{ item }}"
+  with_items: 
+    - fs.suid_dumpable = 0
+    - kernel.sysrq = 0
+    - kernel.randomize_va_space = 2
+
+- name: set fs.dumapable to 0
+  command: sysctl -w "{{ item }}"
+  with_items:
+    - fs.suid_dumpable=0
+    - kernel.sysrq=0
+    - kernel.randomize_va_space=2
+
+- name: check if prelink exits
+  stat: 
+    path: /usr/bink/prelink
+  register: prelink
+
+- name: run prelink
+  command: prelink -ua
+  when: prelink.stat.exists == true
+
+- name: remove prelink
+  apt: 
+    name: prelink
+    state: absent
+
+- name: delete motd files
+  file:
+    path: "/etc/update-motd.d/{{ item }}"
+    state: absent
+  with_items:
+    - 10-help-text
+    - 51-cloudguest
+    - 90-updates-available
+    - 91-release-upgrade
+
+- name: create disclaimer file
+  copy:
+    dest: /etc/update-motd.d/11-disclaimer
+    content: |
+      #!/bin/bash
+      echo 'Your activity is logged and recorded for audit purposes.'
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: create motd file
+  file:
+    path: /etc/motd
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: create issue files
+  copy:
+    dest: "/etc/{{ item }}"
+    content: Authorized uses only. All activity may be monitored and reported
+    owner: root
+    group: root
+    mode: '0644'
+  with_items: 
+    - issue
+    - issue.net
+
+- name: delete xinetd.conf 
+  file:
+    path: /etc/xinetd.conf
+    state: absent
+
+- name: delete xinetd dir
+  file:
+    path: /etc/xinetd.d
+    state: absent
+
+- name: remove prelink
+  apt: 
+    pkg: 
+      - openbsd-inetd
+      - xserver-xorg
+    state: absent
+
+- name: disable services
+  service:
+    name: "{{ item }}"
+    enabled: no
+  when: "item in services"
+  with_items:
+    - avahi-daemon
+    - cups
+    - isc-dhcp-server
+    - isc-dhcp-server6
+    - slapd
+    - nfs-server
+    - bind9
+    - vsftpd
+    - apache2
+    - dovecot
+    - smbd
+    - squid
+    - snmpd
+    - postfix
+    - rsync
+    - nis
+
+- name: mask rpcbind
+  systemd:
+    name: rpcbind
+    masked: yes
+
+- name: remove packages
+  apt:
+    pkg:
+      - nis
+      - rsh-client
+      - rsh-redone-client
+      - talk
+      - telnet
+      - ldap-utils
+      - auditd
+    state: absent
+
+- name: create disabled_protocols.conf
+  file:
+    path: /etc/modprobe.d/disabled_protocols.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add lines to disabled_protocol
+  lineinfile:
+    dest: /etc/modprobe.d/disabled_protocols.conf
+    line: "install {{ item }} /bin/true"
+  with_items:
+    - dccp
+    - sctp
+    - rds
+    - tipc
+
+- name: enable auditd on boot
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: GRUB_CMDLINE_LINUX="audit=1"
+
+- name: update grub
+  command: update-grub
+
+- name: enable rsyslog
+  service:
+    name: rsyslog
+    enabled: yes
+
+- name: FileCreateMode in rsyslog
+  lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: '^$FileCreateMode'
+    line: $FileCreateMode 0640"
+
+- name: enable cron service
+  service:
+    name: cron
+    enabled: yes
+
+- name: change crontab mode
+  file:
+    path: /etc/crontab
+    mode: '0600'
+
+- name: change cron dir mode
+  file:
+    path: "/etc/cron.{{ item }}"
+    state: directory
+    mode: '0700'
+  with_items:
+    - hourly
+    - daily
+    - weekly
+    - monthly
+    - d
+  
+- name: delete .deny files
+  file:
+    path: "/etc/{{ item }}.deny"
+    state: absent
+  with_items:
+    - cron
+    - at
+
+- name: create .allow files
+  file:
+    path: "/etc/{{ item }}.allow"
+    owner: root
+    group: root
+    state: touch
+    mode: '0600'
+  with_items:
+    - cron
+    - at
+
+- name: prevent access to su
+  lineinfile:
+    dest: /etc/pam.d/su
+    line: "auth required pam_wheel.so"
+
+- name: change mode of passwd and group files
+  file:
+    path: "/etc/{{ item.name }}"
+    mode: '{{ item.mode }}'
+  with_items:
+    - { "name": "passwd", "mode": "0644" }
+    - { "name": "passwd-", "mode": "0644" }
+    - { "name": "group", "mode": "0644" }
+    - { "name": "group-", "mode": "0644" }
+    - { "name": "shadow", "mode": "0640" }
+    - { "name": "shadow-", "mode": "0640" }
+    - { "name": "gshadow", "mode": "0640" }
+    - { "name": "gshadow-", "mode": "0640" }
+
+# may not be needed as it keeps asking us to change password every 2 months
+# - name: set password limits 
+#   lineinfile:
+#     path: /etc/login.defs
+#     regexp: '^{{ item.name }}'
+#     line: "{{ item.name }} {{ item.value }}"
+#   with_items:
+#     - { "name": "PASS_MAX_DAYS", "value": 60 }
+#     - { "name": "PASS_MIN_DAYS", "value": 7 }
+#     - { "name": "UMASK", "value": 027 }
+
