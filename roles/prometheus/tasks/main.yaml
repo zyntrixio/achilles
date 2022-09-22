@@ -33,11 +33,6 @@
     mode: '0755'
     checksum: sha256:{{ node_exporter_checksum }}
 
-# - name: create node_exporter file in sbin
-#   file:
-#     path: /usr/local/sbin/node_exporter
-#     state: touch
-
 - name: Create symbolic link for node_exporter
   file:
     src: /opt/node_exporter/{{ node_exporter_version }}
