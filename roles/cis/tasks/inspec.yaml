@@ -1,0 +1,59 @@
+- name: install requests 
+  apt:
+    name: python3-requests
+    state: present
+
+- name: create dir
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /usr/local/src/inspec
+    - /usr/local/src/inspec/profiles
+    - /usr/local/src/inspec/profiles/base
+
+- name: Check if inspec is installed
+  command: dpkg-query -W inspec
+  register: inspec_check
+  failed_when: inspec_check.rc > 1
+  changed_when: inspec_check.rc == 1
+
+- name: download inspec deb
+  get_url:
+    url: "{{ deb_url }}"
+    dest: /usr/local/src/inspec/inspec.deb
+    checksum: "sha256:{{ deb_sha256 }}"
+  when: inspec_check.rc == 1
+
+- name: install deb package
+  apt:
+    deb: /usr/local/src/inspec/inspec.deb
+  when: inspec_check.rc == 1
+
+- name: add inspec.py file
+  copy:
+    src: inspec.py
+    dest: /usr/local/src/inspec/inspec.py
+    owner: root
+    group: root
+    mode: '0770'
+
+- name: install inspec systemd unit file
+  template: 
+    src: "{{ item }}"
+    dest: /etc/systemd/system/{{ item }}
+  with_items:
+    - inspec.service
+    - inspec.timer
+
+- name: start inspec service
+  service:
+    name: inspec.service
+    enabled: yes
+
+- name: start inspec timer
+  service:
+    name: inspec.timer
+    state: started
+    enabled: yes
+    daemon_reload: yes

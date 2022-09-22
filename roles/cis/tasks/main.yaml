@@ -303,14 +303,4 @@
     - { "name": "gshadow", "mode": "0640" }
     - { "name": "gshadow-", "mode": "0640" }
 
-# may not be needed as it keeps asking us to change password every 2 months
-# - name: set password limits 
-#   lineinfile:
-#     path: /etc/login.defs
-#     regexp: '^{{ item.name }}'
-#     line: "{{ item.name }} {{ item.value }}"
-#   with_items:
-#     - { "name": "PASS_MAX_DAYS", "value": 60 }
-#     - { "name": "PASS_MIN_DAYS", "value": 7 }
-#     - { "name": "UMASK", "value": 027 }
-
+- include_tasks: inspec.yaml
