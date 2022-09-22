@@ -26,21 +26,30 @@
 
 - name: copy node_exporter file
   get_url:
-    url: https://github.com/prometheus/node_exporter/releases/download/{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+    url: "{{ node_exporter_url }}"
     dest: /opt/node_exporter/{{ node_exporter_version }}
     owner: root
     group: root
     mode: '0755'
     checksum: sha256:{{ node_exporter_checksum }}
 
+# - name: create node_exporter file in sbin
+#   file:
+#     path: /usr/local/sbin/node_exporter
+#     state: touch
+
 - name: Create symbolic link for node_exporter
   file:
-    src: /usr/local/sbin/node_exporter
-    dest: /opt/node_exporter/{{ node_exporter_version }}
+    src: /opt/node_exporter/{{ node_exporter_version }}
+    dest: /usr/local/sbin/node_exporter
     state: link
-  notify: node_exporter
 
 - name: Add node_exporter service file
-  template: src=sftp/pysftp.service dest=/etc/systemd/system/pysftp.service mode=0644
-  notify: reload systemctl
+  template: src=node_exporter.service dest=/etc/systemd/system/node_exporter.service mode=0644
 
+- name: start node_exporter service
+  service:
+    name: node_exporter.service
+    state: started
+    enabled: yes
+    daemon_reload: yes
