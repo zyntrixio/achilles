@@ -1,10 +1,10 @@
-# - name: Configure VMs
-#   hosts: all
-#   roles:
-#     - { role: common, tags: [common] }
-#     - { role: prometheus, tags: [promethus] }
-#     - { role: user_management, tags: [user_management] }
-#     - { role: cis, tags: [cis] }
+- name: Configure VMs
+  hosts: all:!wireguard
+  roles:
+    - { role: common, tags: [common] }
+    - { role: prometheus, tags: [promethus] }
+    - { role: user_management, tags: [user_management] }
+    - { role: cis, tags: [cis] }
 
 # # - name: Jarvis
 # #   hosts: all
