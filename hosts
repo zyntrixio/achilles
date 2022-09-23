@@ -1,5 +1,9 @@
 [all]
-46.101.20.166 ansible_connection=ssh ansible_user=root
+139.59.186.9 ansible_connection=ssh ansible_user=root
+167.172.49.71 ansible_connection=ssh ansible_user=root
 
 [sftp]
-46.101.20.166 ansible_connection=ssh ansible_user=root
+167.172.49.71 ansible_connection=ssh ansible_user=root
+
+[wireguard]
+142.93.44.94 ansible_connection=ssh ansible_user=root

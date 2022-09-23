@@ -1,0 +1,96 @@
+- name: install wireguard
+  apt:
+    name: wireguard
+    update_cache: yes
+    state: present
+
+- name: add ipforward in wiregard conf
+  copy:
+    dest: /etc/sysctl.d/99-wireguard.conf
+    owner: root
+    group: root
+    content: |
+      net.ipv4.ip_forward = 1
+  register: ipforward
+
+- name: reload sysctl
+  command: sysctl --system
+  when: ipforward.changed == True
+
+- name: populate wireguard conf file
+  template:
+    src: wireguard.conf.j2
+    dest: /etc/wireguard/wg0.conf
+    owner: root
+    group: root
+    mode: '0640'
+  no_log: true
+  vars:
+    server_private_key: "{{ wireguard_server_private_key }}"
+    users: "{{ wireguard_users }}"
+  notify: wireguard
+
+- name: populate wireguard user
+  template:
+    src: users.csv.j2
+    dest: /etc/wireguard/users.csv
+    owner: root
+    group: root
+    mode: '0640'
+  no_log: true
+  vars:
+    users: "{{ wireguard_users }}"
+  notify: wireguard
+
+- name: update cifs-utils
+  apt:
+    name: cifs-utils
+    update_cache: yes
+
+- name: create mount dir
+  file:
+    name: "{{ item }}"
+    state: directory
+  with_items:
+    - /mount/binkuksouthwireguard
+    - /mount/binkuksouthwireguard/users
+
+- name: install mount service scripts
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/system/{{ item }}
+    mode: '0644'
+  with_items:
+    - mount-binkuksouthwireguard-users.mount
+    - mount-binkuksouthwireguard-users.automount
+
+- name: enable automount service
+  service:
+    name: mount-binkuksouthwireguard-users.automount
+    enabled: yes
+    state: started
+
+- name: Create ssh dir
+  file:
+    path: /mount/binkuksouthwireguard/users/{{ item.name }}/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+  loop: "{{ wireguard_users }}"
+
+- name: create files for each user
+  template:
+    src: users.conf.j2
+    dest: /mount/binkuksouthwireguard/users/{{ item.name }}/.ssh/conf
+    owner: root
+    group: root
+    mode: '0644'
+  no_log: true
+  vars:
+    private: "{{ item.private }}"
+    address: "{{ item.ip }}"
+    srv_public: "{{ wireguard_server_public_key }}"
+    srv_endpoint: "{{ wireguard_server_fqdn }}"
+    srv_port: "{{ wireguard_server_port }}"
+  loop: "{{ wireguard_users }}"
