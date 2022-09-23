@@ -5,14 +5,14 @@ After=network.target
 
 [Service]
 Restart=always
-User='node_exporter'
-Group='node_exporter
-ExecStart=/usr/local/sbin/node_exporter --collector.diskstats.ignored-devices="^(dm|ram|loop|fd|(h|v|xv)d[a-z]|nvme\\d+n\\d+p)\\d+$" 
-    --collector.filesystem.ignored-mount-points="^/(sys|proc|dev|run)($|/)" 
-    --collector.systemd 
-    --collector.systemd.unit-whitelist="^(kube).+$"
+User=node_exporter
+Group=node_exporter
+ExecStart=/usr/local/sbin/node_exporter --collector.diskstats.ignored-devices="^(dm|ram|loop|fd|(h|v|xv)d[a-z]|nvme\d+n\d+p)\d+$" \
+--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|run)($|/)" \
+--collector.systemd \
+--collector.systemd.unit-whitelist="^(kube).+$"
 WorkingDirectory=/
-RestartSec=30s
+RestartSec=5m
 
 [Install]
 WantedBy=multi-user.target
