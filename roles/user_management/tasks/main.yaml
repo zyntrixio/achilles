@@ -5,6 +5,12 @@
     remove: true #removes dir
   loop: "{{ users_disabled }}"
 
+- name: Create group for active users
+  group:
+    name: "{{ item.name }}"
+    state: present
+  loop: "{{ users_active }}"
+
 - name: Create active users
   user:
     name: "{{ item.name }}"
@@ -63,7 +69,7 @@
     dest: /home/{{ item.name }}/.google_authenticator
     owner: "{{ item.name }}"
     group: "{{ item.name }}"
-    mode: '0644'
+    mode: '0600'
   vars:
     seed: "{{ item.otpseed }}"
   loop: "{{ users_active }}"
@@ -101,6 +107,8 @@
       pkg:
         - python3-pip
         - inotify-tools
+      state: present
+      update_cache: yes
   
   - name: Install azure blob
     command: pip3 install azure-storage-blob==12.5.0

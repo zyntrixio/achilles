@@ -8,5 +8,5 @@
     name: pysftp
     state: restarted
 
-- name: Reload systemctl
+- name: reload systemctl
   command: systemctl daemon-reload
