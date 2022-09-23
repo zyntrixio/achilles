@@ -11,10 +11,11 @@
     group: root
     content: |
       net.ipv4.ip_forward = 1
-
+  register: ipforward
 
 - name: reload sysctl
   command: sysctl --system
+  when: ipforward.changed == True
 
 - name: populate wireguard conf file
   template:
@@ -36,7 +37,7 @@
     owner: root
     group: root
     mode: '0640'
-  # no_log: true
+  no_log: true
   vars:
     users: "{{ wireguard_users }}"
   notify: wireguard
@@ -69,6 +70,15 @@
     enabled: yes
     state: started
 
+- name: Create ssh dir
+  file:
+    path: /mount/binkuksouthwireguard/users/{{ item.name }}/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+  loop: "{{ wireguard_users }}"
+
 - name: create files for each user
   template:
     src: users.conf.j2
@@ -76,7 +86,7 @@
     owner: root
     group: root
     mode: '0644'
-  # no_log: true
+  no_log: true
   vars:
     private: "{{ item.private }}"
     address: "{{ item.ip }}"
