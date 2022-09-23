@@ -1,0 +1,13 @@
+[Interface]
+PrivateKey = {{ server_private_key }}
+Address = 10.10.10.1/24
+ListenPort = 51820
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+{% for u in users %}
+[Peer]
+PublicKey = {{ u['public'] }}
+AllowedIPs = {{ u['ip'] }}/32
+
+{% endfor %}
