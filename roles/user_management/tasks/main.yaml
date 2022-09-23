@@ -22,7 +22,9 @@
   loop: "{{ users_active }}"
 
 - name: Change home directory permissions
-  command: chmod 750 /home/{{ item.name }}
+  file:
+    dest: /home/{{ item.name }}
+    mode: '0750'
   loop: "{{ users_active }}"
 
 - name: Create ssh dir
@@ -77,7 +79,7 @@
 - name: add .zshrc for root user
   copy: 
     src: .zshrc
-    dest: /.zshrc
+    dest: /root/.zshrc
     owner: root
     group: root
     mode: '0644'
@@ -109,12 +111,14 @@
         - inotify-tools
       state: present
       update_cache: yes
-  
+
   - name: Install azure blob
-    command: pip3 install azure-storage-blob==12.5.0
+    pip: 
+      name: azure-storage-blob==12.5.0
   
   - name: Install inotify
-    command: pip3 install inotify==0.2.10
+    pip:
+      name: inotify==0.2.10
 
   - name: Add pysftp service file
     template: src=sftp/pysftp.service dest=/etc/systemd/system/pysftp.service mode=0644

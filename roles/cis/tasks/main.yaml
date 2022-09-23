@@ -22,7 +22,7 @@
     owner: root
     group: root
     mode: '0644'
-  when: disabled_file.stat.exists == false
+  when: disabled_file.stat.exists == False
 
 - name: check if dev-sec file exists
   stat: 
@@ -36,7 +36,7 @@
     owner: root
     group: root
     mode: '0644'
-  when: dev_sec_file.stat.exists == false
+  when: dev_sec_file.stat.exists == False
 
 - name: Add lines to dev-conf
   lineinfile:
@@ -52,13 +52,31 @@
     - udf
     - vfat
 
-- name: add mount line to fstab
+- name: check if mount line is present
   lineinfile:
-    dest: /etc/fstab
-    line: tmpfs /dev/shm tmpfs nodev,nosuid,noexec 0
+    path: /etc/fstab
+    regexp: "^tmpfs /dev/shm"
+    state: absent
+  check_mode: yes
+  changed_when: False
+  register: mountline
 
-- name: remount dev-shm
-  command: mount -o remount,nodev,nosuid,noexec /dev/shm
+- block:
+  - name: add mount line to fstab
+    lineinfile:
+      dest: /etc/fstab
+      line: tmpfs /dev/shm tmpfs nodev,nosuid,noexec 0 0
+      state: present
+
+  - name: remount dev-shm
+    mount:
+      path: /dev/shm
+      state: mounted
+      opts: remount,nodev,nosuid,noexec
+      fstype: tmpfs
+      src: tmpfs
+
+  when: not mountline.found
 
 - name: Get the list of services
   service_facts:
@@ -89,11 +107,12 @@
     - kernel.randomize_va_space = 2
 
 - name: set fs.dumapable to 0
-  command: sysctl -w "{{ item }}"
-  with_items:
-    - fs.suid_dumpable=0
-    - kernel.sysrq=0
-    - kernel.randomize_va_space=2
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    state: present
+  with_dict: "{{ sysctl_config }}"
 
 - name: check if prelink exits
   stat: 
@@ -129,6 +148,11 @@
     group: root
     mode: '0755'
 
+- name: check if motd file exists
+  stat: 
+    path: /etc/motd
+  register: motd
+
 - name: create motd file
   file:
     path: /etc/motd
@@ -136,6 +160,7 @@
     owner: root
     group: root
     mode: '0644'
+  when: motd.stat.exists == False
 
 - name: create issue files
   copy:
@@ -205,6 +230,11 @@
       - auditd
     state: absent
 
+- name: check if disabled_protocols conf exists
+  stat:
+    path: /etc/modprobe.d/disabled_protocols.conf
+  register: disabled_protocols
+
 - name: create disabled_protocols.conf
   file:
     path: /etc/modprobe.d/disabled_protocols.conf
@@ -212,6 +242,7 @@
     owner: root
     group: root
     mode: '0644'
+  when: disabled_protocols.stat.exists == False
 
 - name: Add lines to disabled_protocol
   lineinfile:
@@ -228,9 +259,11 @@
     path: /etc/default/grub
     regexp: '^GRUB_CMDLINE_LINUX='
     line: GRUB_CMDLINE_LINUX="audit=1"
+  register: grub
 
 - name: update grub
   command: update-grub
+  when: grub.changed
 
 - name: enable rsyslog
   service:
@@ -273,6 +306,11 @@
     - cron
     - at
 
+- name: check if .allow files exists
+  stat:
+    path: /etc/cron.allow
+  register: allow
+
 - name: create .allow files
   file:
     path: "/etc/{{ item }}.allow"
@@ -283,6 +321,7 @@
   with_items:
     - cron
     - at
+  when: allow.stat.exists == False
 
 - name: prevent access to su
   lineinfile:
