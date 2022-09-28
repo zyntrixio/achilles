@@ -1,0 +1,62 @@
+- name: Install apt-transport-https 
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add erlang key
+  apt_key:
+    url: https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/gpg.E495BB49CC4BBE5B.key
+    state: present
+
+- name: Add erlang apt repo
+  apt_repository:
+    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu {{ ansible_distribution_release }} contrib
+    state: present
+
+- name: Add rabbitmq key
+  apt_key:
+    url: https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/gpg.9F4587F226208342.key
+    state: present
+
+- name: Add rabbitmq apt repo
+  apt_repository:
+    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu {{ ansible_distribution_release }} contrib
+    state: present
+
+- name: Install rabbitmq 
+  apt:
+    name: rabbitmq-server
+    state: present
+
+- name: Add in certs
+  copy:
+    src: certificates/{{ item }}
+    dest: /etc/rabbitmq/{{ item }}
+    owner: rabbitmq
+    group: rabbitmq
+    mode: '0600'
+  with_items:
+    - cert.pem
+    - ca-bundle.pem
+    - key.pem
+
+- name: Overwrite content of erlang cookie
+  copy:
+    dest: /var/lib/rabbitmq/.erlang.cookie
+    content: VNQMAWCGVEEOZPKIYFPU
+    owner: rabbitmq
+    group: rabbitmq
+    mode: '0400'
+  notify: rabbitmq-server
+
+- name: copy enabled plugins and rabbitmq conf
+  copy:
+    src: "{{ item }}"
+    dest: /etc/rabbitmq/{{ item }}
+    owner: rabbitmq
+    group: rabbitmq
+    mode: '0640'
+  with_items:
+    - enabled_plugins
+    - rabbitmq.conf
+  notify: rabbitmq-server

@@ -1,19 +1,19 @@
 - name: Configure VMs
-  hosts: all:!wireguard
+  hosts: all:!wireguard:!rabbitmq
   roles:
     - { role: common, tags: [common] }
     - { role: prometheus, tags: [promethus] }
     - { role: user_management, tags: [user_management] }
     - { role: cis, tags: [cis] }
 
-# # - name: Jarvis
-# #   hosts: all
-# #   roles:
-# #     - { role: common, tags: [common] }
-# #     - { role: prometheus, tags: [promethus] }
-
 - name: wireguard
   hosts: wireguard
   roles:
     -  { role: common, tags: [common] }
     -  { role: wireguard, tags: [wireguard] }
+
+- name: Configure RabbitMQ
+  hosts: rabbitmq
+  roles:
+    -  { role: common, tags: [common] }
+    -  { role: rabbitmq, tags: [rabbitmq] }
