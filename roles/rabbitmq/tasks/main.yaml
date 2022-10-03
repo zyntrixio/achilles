@@ -10,7 +10,7 @@
 
 - name: Add erlang apt repo
   apt_repository:
-    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu {{ ansible_distribution_release }} contrib
+    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu {{ ansible_distribution_release }} main
     filename: erlang
     state: present
 
@@ -21,7 +21,7 @@
 
 - name: Add rabbitmq apt repo
   apt_repository:
-    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu {{ ansible_distribution_release }} contrib
+    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu {{ ansible_distribution_release }} main
     filename: rabbitmq
     state: present
 
