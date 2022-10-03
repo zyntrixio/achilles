@@ -1,5 +1,6 @@
 - name: Configure VMs
-  hosts: all:!wireguard:!rabbitmq
+  hosts: all
+  become: true
   roles:
     - { role: common, tags: [common] }
     - { role: prometheus, tags: [promethus] }
@@ -8,12 +9,12 @@
 
 - name: wireguard
   hosts: wireguard
+  become: true
   roles:
-    -  { role: common, tags: [common] }
     -  { role: wireguard, tags: [wireguard] }
 
 - name: Configure RabbitMQ
   hosts: rabbitmq
+  become: true
   roles:
-    -  { role: common, tags: [common] }
     -  { role: rabbitmq, tags: [rabbitmq] }

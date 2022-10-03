@@ -1,9 +1,18 @@
 [all]
-139.59.186.9 ansible_connection=ssh ansible_user=root
-167.172.49.71 ansible_connection=ssh ansible_user=root
+bastion
+airbyte
+tableau
+prefect
+opensearch
 
 [sftp]
-167.172.49.71 ansible_connection=ssh ansible_user=root
+sftp0
+sftp1
+
+[rabbitmq]
+prod-rabbitmq0
+prod-rabbitmq1
+prod-rabbitmq2
 
 [wireguard]
-142.93.44.94 ansible_connection=ssh ansible_user=root
+wireguard

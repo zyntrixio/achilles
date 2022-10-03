@@ -11,6 +11,7 @@
 - name: Add erlang apt repo
   apt_repository:
     repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu {{ ansible_distribution_release }} contrib
+    filename: erlang
     state: present
 
 - name: Add rabbitmq key
@@ -21,12 +22,18 @@
 - name: Add rabbitmq apt repo
   apt_repository:
     repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu {{ ansible_distribution_release }} contrib
+    filename: rabbitmq
     state: present
 
 - name: Install rabbitmq 
   apt:
-    name: rabbitmq-server
+    name: rabbitmq-server=3.10.8-1
     state: present
+
+- name: Hold rabbitmq
+  dpkg_selections:
+    name: rabbitmq-server
+    selection: hold
 
 - name: Add in certs
   copy:

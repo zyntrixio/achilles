@@ -31,7 +31,7 @@ users_stfp:
         id: 4000,
         ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEApo4pf1NWLWrcmRWqLvFKOvkzJKDyo8QkN/pil60x4YPs/j+8JUiO1UI9TeP4YSJ9C3nyFNkjqc0jorI5EnVUPdVCGRPweZCgr4Di4eu/2KgYobO9DzvRoBvZAzxIR3dlJDsnOa27FscQ6iZXWdgCvJcTPQaEot/8eKDifZ+eU3Rh2mpVCykiNH4qeYPUTJDws+aC1PfTQQ8bmcN8IWxcG+dVjkKzlM/NJ0lzsJiOQGRJc0ZuC66D8UwJXF0UEzsteWge9DDL394t9mHl5DFhhuLsZ+laNsqVstdppwFk+S9Hd63wy4Yrdu3Wz1obgXcBrdROESTyiZ5o4kaRwf48DQ==",
         upload: {
-            conn_string: "DefaultEndpointsProtocol=https;AccountName=binkuksouthprod;AccountKey=91n6awMXsn2TwMFuk18HZJFAbWalexuZR9CVwPO4xMPu0fBcnIkx4ejIUsiLF+8A/Y/Q3Km3ML+uJAsZlSU7Jw==;EndpointSuffix=core.windows.net",
+            conn_string: "DefaultEndpointsProtocol=https;BlobEndpoint=https://binkuksouthprod.blob.core.windows.net/;AccountName=binkuksouthprod;AccountKey=91n6awMXsn2TwMFuk18HZJFAbWalexuZR9CVwPO4xMPu0fBcnIkx4ejIUsiLF+8A/Y/Q3Km3ML+uJAsZlSU7Jw==",
             container: "harmonia-imports",
             slug: "scheme/harvey-nichols",
         }
@@ -41,17 +41,27 @@ users_stfp:
         id: 4001,
         ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlR8IrClW5vyU3utv+LTshjt49FWxdHnogNj1JesWvQZPla0nFze28Ohup3EPWLZUbVL4z3ay8PJeotszIEDHKc5K8P2/cwytdopOpdvdWJfxZcLzIIrKSMXjc+uXWLA+jvav9JIewEda/SsiM2ChYmR6BtpQirUtupcrbXXPXsjWoZ1BZdKZ6EmVT3uq1bGvMUZgr77QThtbcfR4x9B/3eVJSK5r1H8baohnkQx0cEcCt9KSkjU3gw5RXGKqJXAci+nR/ieCNw5znqKHaIEvsV06UKxqL9UYjuXdLI1bA24R3IKxhb4vrklTt0paisXPljp4YekDRAJ7j9BpgSve3w==",
         upload: {
-            conn_string: "DefaultEndpointsProtocol=https;AccountName=binkuksouthprod;AccountKey=91n6awMXsn2TwMFuk18HZJFAbWalexuZR9CVwPO4xMPu0fBcnIkx4ejIUsiLF+8A/Y/Q3Km3ML+uJAsZlSU7Jw==;EndpointSuffix=core.windows.net",
+            conn_string: "DefaultEndpointsProtocol=https;BlobEndpoint=https://binkuksouthprod.blob.core.windows.net/;AccountName=binkuksouthprod;AccountKey=91n6awMXsn2TwMFuk18HZJFAbWalexuZR9CVwPO4xMPu0fBcnIkx4ejIUsiLF+8A/Y/Q3Km3ML+uJAsZlSU7Jw==",
             container: "harmonia-imports",
             slug: "scheme/iceland",
         }
+    },
+    {
+      name : "viator",
+      id : 4002,
+      ssh_key : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJLUDH/VUPhfUN0hiz7DDEkuKNQTmu2iW3mdmvA/z/ESB+zLh5kid21u27zjeKH5xGKHEkHjz8cGdXQ4FM5YpDEEXTwIyWkxkbHgeC+K5Dn1HCJVk/GiWnh65HKDBwVa5stsdq8LyWxK9hm+enZNy14UWUBPEx4AaX9zX7rsUXO9wCvT19LLb72MgGaIGSgQcLjqXZcsEq11617NNK35bJl+tu7m+kJpDuXwQ1ML211S2JM8fk2un8Ndihd/w3LqaVPMINz2wGtEL1OxWcJRP1ZXLWc516FWQvKWxdPLrVVHIoEhOtrLj2J3ttd9o7P6WryXUhnYolPdwgOD1DSPsE59SDQVzyr1vgEy27h370qw10R8VNIak44RgGHKn1jwcnHUzsc1qWWtYU26bhF5vwFOrS8hs1/11GuLy3o3Gb4e2OhsQiUQJp6LH5BnT8PjZVyB1Fsbz9O3LW6r45pI3+ECcPrjfTuVgq1niQ9EkR2hhQXb4oNqDB+JsBsUV/AcM=",
+      upload : {
+          conn_string : "DefaultEndpointsProtocol=https;BlobEndpoint=https://binkuksouthprod.blob.core.windows.net/;AccountName=binkuksouthprod;AccountKey=91n6awMXsn2TwMFuk18HZJFAbWalexuZR9CVwPO4xMPu0fBcnIkx4ejIUsiLF+8A/Y/Q3Km3ML+uJAsZlSU7Jw==",
+          container : "carina-imports",
+          slug : "viator",
+      }
     },
     {
         name: "trenette-dev",
         id: 4200,
         ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwjW5zg1mK+j+BZT/uCpFcjOhNcT8RnzDAuG92+ndE6",
         upload: {
-            conn_string: "DefaultEndpointsProtocol=https;AccountName=binkuksouthdev;AccountKey=L/xU6NZswZAJbFhKjIGr0feakhY8QsCw4oUuj6bXNfxhWQv2caNkDo8czIu05DBcaZbSL7vfpYGP7OZsbpXuhw==;EndpointSuffix=core.windows.net",
+            conn_string: "DefaultEndpointsProtocol=https;BlobEndpoint=https://binkuksouthdev.blob.core.windows.net/;AccountName=binkuksouthdev;AccountKey=L/xU6NZswZAJbFhKjIGr0feakhY8QsCw4oUuj6bXNfxhWQv2caNkDo8czIu05DBcaZbSL7vfpYGP7OZsbpXuhw==",
             container: "carina-imports",
             slug: "trenette",
         }
@@ -61,7 +71,7 @@ users_stfp:
         id: 4201,
         ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwjW5zg1mK+j+BZT/uCpFcjOhNcT8RnzDAuG92+ndE6",
         upload: {
-            conn_string: "DefaultEndpointsProtocol=https;AccountName=binkuksouthdev;AccountKey=L/xU6NZswZAJbFhKjIGr0feakhY8QsCw4oUuj6bXNfxhWQv2caNkDo8czIu05DBcaZbSL7vfpYGP7OZsbpXuhw==;EndpointSuffix=core.windows.net",
+            conn_string: "DefaultEndpointsProtocol=https;BlobEndpoint=https://binkuksouthstaging.blob.core.windows.net/;AccountName=binkuksouthstaging;AccountKey=pYfZWGtbV2JRxiUh9ilSOEytaGmLuyEJW3mVFbm/9GF/62I+LmVa0uWR0DLaP8huhdiKAJp/S7QBdbXwKDMJpA==",
             container: "carina-imports",
             slug: "trenette",
         }

@@ -6,6 +6,7 @@
   retries: 3
 
 - name: Add core packages
+  become: true
   apt:
     pkg:
       - apt-transport-https

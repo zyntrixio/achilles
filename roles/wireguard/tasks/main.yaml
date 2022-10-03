@@ -70,19 +70,10 @@
     enabled: yes
     state: started
 
-- name: Create ssh dir
-  file:
-    path: /mount/binkuksouthwireguard/users/{{ item.name }}/.ssh
-    state: directory
-    owner: root
-    group: root
-    mode: '0700'
-  loop: "{{ wireguard_users }}"
-
 - name: create files for each user
   template:
     src: users.conf.j2
-    dest: /mount/binkuksouthwireguard/users/{{ item.name }}/.ssh/conf
+    dest: /mount/binkuksouthwireguard/users/{{ item.name }}.conf
     owner: root
     group: root
     mode: '0644'

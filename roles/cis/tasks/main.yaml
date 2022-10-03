@@ -87,10 +87,11 @@
     enabled: no
   when: "'autofs.service' in services"
 
-- name: change mode of grub.cfg
-  file:
-    path: /boot/grub/grub.cfg
-    mode: '0400'
+# this is included with ubuntu
+# - name: change mode of grub.cfg
+#   file:
+#     path: /boot/grub/grub.cfg
+#     mode: '0400'
 
 - name: add hard limit to file
   lineinfile:
@@ -342,4 +343,4 @@
     - { "name": "gshadow", "mode": "0640" }
     - { "name": "gshadow-", "mode": "0640" }
 
-- include_tasks: inspec.yaml
+# - include_tasks: inspec.yaml
