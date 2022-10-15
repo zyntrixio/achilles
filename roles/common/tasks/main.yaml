@@ -1,8 +1,9 @@
+---
 - name: Update and upgrade apt packages
   become: true
   apt:
-    upgrade: yes
-    update_cache: yes
+    upgrade: true
+    update_cache: true
   retries: 3
 
 - name: Add core packages
@@ -22,4 +23,3 @@
       - openssh-server
       - openssh-client
       - libpam-google-authenticator
-

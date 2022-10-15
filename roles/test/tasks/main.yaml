@@ -1,3 +1,4 @@
+---
 - name: print values
   debug:
-    msg: "{{ ansible_distribution_release }}"
+    msg: '{{ ansible_distribution_release }}'

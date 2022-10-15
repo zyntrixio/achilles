@@ -1,8 +1,9 @@
+---
 # deb_url: "https://packages.chef.io/files/stable/inspec/4.21.3/ubuntu/{{ ansible_distribution_version }}/inspec_4.21.3-1_amd64.deb"
-deb_url: "https://packages.chef.io/files/stable/inspec/4.21.3/ubuntu/20.04/inspec_4.21.3-1_amd64.deb"
-deb_sha256: "4a1eb3a0deb5bbbe63cb0ab63b30eaef06d16077dfbc1671e60fa897e7759375"
+deb_url: https://packages.chef.io/files/stable/inspec/4.21.3/ubuntu/20.04/inspec_4.21.3-1_amd64.deb
+deb_sha256: 4a1eb3a0deb5bbbe63cb0ab63b30eaef06d16077dfbc1671e60fa897e7759375
 
 sysctl_config:
-  fs.suid_dumpable: 0 
+  fs.suid_dumpable: 0
   kernel.sysrq: 0
   kernel.randomize_va_space: 2

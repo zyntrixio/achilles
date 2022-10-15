@@ -1,7 +1,8 @@
+---
 - name: install wireguard
   apt:
     name: wireguard
-    update_cache: yes
+    update_cache: true
     state: present
 
 - name: add ipforward in wiregard conf
@@ -25,8 +26,8 @@
     group: root
     mode: '0640'
   vars:
-    server_private_key: "{{ wireguard_server_private_key }}"
-    users: "{{ wireguard_users }}"
+    server_private_key: '{{ wireguard_server_private_key }}'
+    users: '{{ wireguard_users }}'
   notify: wireguard
 
 - name: populate wireguard user
@@ -37,17 +38,17 @@
     group: root
     mode: '0640'
   vars:
-    users: "{{ wireguard_users }}"
+    users: '{{ wireguard_users }}'
   notify: wireguard
 
 - name: update cifs-utils
   apt:
     name: cifs-utils
-    update_cache: yes
+    update_cache: true
 
 - name: create mount dir
   file:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: directory
   with_items:
     - /mount/binkuksouthwireguard
@@ -55,7 +56,7 @@
 
 - name: install mount service scripts
   copy:
-    src: "{{ item }}"
+    src: '{{ item }}'
     dest: /etc/systemd/system/{{ item }}
     mode: '0644'
   with_items:
@@ -65,7 +66,7 @@
 - name: enable automount service
   service:
     name: mount-binkuksouthwireguard-users.automount
-    enabled: yes
+    enabled: true
     state: started
 
 - name: create files for each user
@@ -76,9 +77,9 @@
     group: root
     mode: '0644'
   vars:
-    private: "{{ item.private }}"
-    address: "{{ item.ip }}"
-    srv_public: "{{ wireguard_server_public_key }}"
-    srv_endpoint: "{{ wireguard_server_fqdn }}"
-    srv_port: "{{ wireguard_server_port }}"
-  loop: "{{ wireguard_users }}"
+    private: '{{ item.private }}'
+    address: '{{ item.ip }}'
+    srv_public: '{{ wireguard_server_public_key }}'
+    srv_endpoint: '{{ wireguard_server_fqdn }}'
+    srv_port: '{{ wireguard_server_port }}'
+  loop: '{{ wireguard_users }}'

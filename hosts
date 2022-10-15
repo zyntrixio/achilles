@@ -1,18 +1,35 @@
 [all]
-bastion
-airbyte
-tableau
-prefect
-opensearch
+bastion ansible_host=ssh.uksouth.bink.sh 
+opensearch ansible_host=opensearch.uksouth.bink.host ansible_ssh_common_args="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
+
+[all:vars]
+ansible_user=terraform
+ansible_ssh_private_key_file=~/.ssh/id_bink_azure_terraform
+
+[datawarehouse]
+tableau ansible_host=tableau.prod.uksouth.bink.host
+prod-airbyte ansible_host=airbyte.prod.uksouth.bink.host
+prod-prefect ansible_host=prefect.prod.uksouth.bink.host
+staging-airbyte ansible_host=airbyte.staging.uksouth.bink.host
+staging-prefect ansible_host=prefect.staging.uksouth.bink.host
+
+[datawarehouse:vars]
+ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
 
 [sftp]
-sftp0
-sftp1
+sftp0 ansible_host=sftp0.core.uksouth.bink.host
+sftp1 ansible_host=sftp1.core.uksouth.bink.host
+
+[sftp:vars]
+ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
 
 [rabbitmq]
-prod-rabbitmq0
-prod-rabbitmq1
-prod-rabbitmq2
+prod-rabbitmq0 ansible_host=prod-rabbitmq0.uksouth.bink.host
+prod-rabbitmq1 ansible_host=prod-rabbitmq1.uksouth.bink.host
+prod-rabbitmq2 ansible_host=prod-rabbitmq2.uksouth.bink.host
 
-[wireguard]
-wireguard
+[rabbitmq:vars]
+ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
+
+[vpn]
+wireguard ansible_host=wireguard.uksouth.bink.sh

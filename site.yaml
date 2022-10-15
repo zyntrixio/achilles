@@ -1,20 +1,21 @@
+---
 - name: Configure VMs
   hosts: all
   become: true
   roles:
-    - { role: common, tags: [common] }
-    - { role: prometheus, tags: [promethus] }
-    - { role: user_management, tags: [user_management] }
-    - { role: cis, tags: [cis] }
+    - role: common
+    - role: prometheus
+    - role: user_management
+    - role: cis
 
-- name: wireguard
-  hosts: wireguard
+- name: Wireguard
+  hosts: vpn
   become: true
   roles:
-    -  { role: wireguard, tags: [wireguard] }
+    - role: wireguard
 
-- name: Configure RabbitMQ
+- name: RabbitMQ
   hosts: rabbitmq
   become: true
   roles:
-    -  { role: rabbitmq, tags: [rabbitmq] }
+    - role: rabbitmq

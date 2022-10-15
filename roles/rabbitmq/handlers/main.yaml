@@ -1,3 +1,4 @@
+---
 - name: rabbitmq-server
   service:
     name: rabbitmq-server.service

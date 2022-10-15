@@ -15,13 +15,31 @@ The intention is to use GitHub Actions to execute every 60 minutes to ensure all
 
 ### Local Development
 
-Needs to be added 
+#### Install Asnible
+
+Install Asnible with `brew install ansible`
+
+#### SSH Config Setup
+
+The `~/.ssh/config` needs to be setup with the following:
+
+```
+Host bastion
+    HostName ssh.uksouth.bink.sh
+    User chris_pressland
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+
+Host *.uksouth.bink.host *.prod.uksouth.bink.host *.staging.uksouth.bink.host *.dev.uksouth.bink.host *.sandbox.uksouth.bink.host *.core.uksouth.bink.host
+    ProxyJump bastion
+    User chris_pressland
+    IdentityFile ~/.ssh/id_ed25519
+```
+
+Check you can access all hosts via: `ansible all -i hosts -m ping`
+Run all playbooks on all hosts via: `ansible-playbook -i hosts site.yaml`
+Run all playbooks on specific hosts: `ansible-playbook -i hosts -l datawarehouse site.yaml`
 
 ### Continious Integration
 
-Needs to be added 
-
-
-Needs to write out the required SSH key to `~/.ssh/id_rsa`
-
-Needs to write out the require SSH config to `~/.ssh/config`
+TODO: Needs to be added

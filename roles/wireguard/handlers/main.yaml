@@ -1,3 +1,4 @@
+---
 - name: wireguard
   service:
     name: wg-quick@wg0

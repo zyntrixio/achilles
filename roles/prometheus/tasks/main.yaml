@@ -1,3 +1,4 @@
+---
 - name: Remove 'node_exporter' package
   apt:
     name: prometheus-node-exporter
@@ -26,7 +27,7 @@
 
 - name: copy node_exporter file
   get_url:
-    url: "{{ node_exporter_url }}"
+    url: '{{ node_exporter_url }}'
     dest: /opt/node_exporter/{{ node_exporter_version }}
     owner: root
     group: root
@@ -40,11 +41,12 @@
     state: link
 
 - name: Add node_exporter service file
-  template: src=node_exporter.service dest=/etc/systemd/system/node_exporter.service mode=0644
+  template: src=node_exporter.service dest=/etc/systemd/system/node_exporter.service
+    mode=0644
 
 - name: start node_exporter service
   service:
     name: node_exporter.service
     state: started
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true

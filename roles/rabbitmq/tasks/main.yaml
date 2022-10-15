@@ -1,4 +1,5 @@
-- name: Install apt-transport-https 
+---
+- name: Install apt-transport-https
   apt:
     name: apt-transport-https
     state: present
@@ -10,7 +11,8 @@
 
 - name: Add erlang apt repo
   apt_repository:
-    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu {{ ansible_distribution_release }} main
+    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu
+      {{ ansible_distribution_release }} main
     filename: erlang
     state: present
 
@@ -21,11 +23,12 @@
 
 - name: Add rabbitmq apt repo
   apt_repository:
-    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu {{ ansible_distribution_release }} main
+    repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu
+      {{ ansible_distribution_release }} main
     filename: rabbitmq
     state: present
 
-- name: Install rabbitmq 
+- name: Install rabbitmq
   apt:
     name: rabbitmq-server=3.10.8-1
     state: present
@@ -58,7 +61,7 @@
 
 - name: copy enabled plugins and rabbitmq conf
   copy:
-    src: "{{ item }}"
+    src: '{{ item }}'
     dest: /etc/rabbitmq/{{ item }}
     owner: rabbitmq
     group: rabbitmq

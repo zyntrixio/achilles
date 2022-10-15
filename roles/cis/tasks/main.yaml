@@ -1,7 +1,8 @@
+---
 - name: Update and upgrade apt packages
   become: true
   apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 86400
 
 - name: Add core packages
@@ -11,7 +12,7 @@
       - clamav-daemon
 
 - name: check if disabled file_system file exists
-  stat: 
+  stat:
     path: /etc/modprobe.d/disabled_filesystems.conf
   register: disabled_file
 
@@ -25,7 +26,7 @@
   when: disabled_file.stat.exists == False
 
 - name: check if dev-sec file exists
-  stat: 
+  stat:
     path: /etc/modprobe.d/dev-sec.conf
   register: dev_sec_file
 
@@ -41,7 +42,7 @@
 - name: Add lines to dev-conf
   lineinfile:
     dest: /etc/modprobe.d/dev-sec.conf
-    line: "install {{ item }} /bin/true"
+    line: install {{ item }} /bin/true
   with_items:
     - cramfs
     - freevxfs
@@ -55,26 +56,26 @@
 - name: check if mount line is present
   lineinfile:
     path: /etc/fstab
-    regexp: "^tmpfs /dev/shm"
+    regexp: ^tmpfs /dev/shm
     state: absent
-  check_mode: yes
-  changed_when: False
+  check_mode: true
+  changed_when: false
   register: mountline
 
 - block:
-  - name: add mount line to fstab
-    lineinfile:
-      dest: /etc/fstab
-      line: tmpfs /dev/shm tmpfs nodev,nosuid,noexec 0 0
-      state: present
+    - name: add mount line to fstab
+      lineinfile:
+        dest: /etc/fstab
+        line: tmpfs /dev/shm tmpfs nodev,nosuid,noexec 0 0
+        state: present
 
-  - name: remount dev-shm
-    mount:
-      path: /dev/shm
-      state: mounted
-      opts: remount,nodev,nosuid,noexec
-      fstype: tmpfs
-      src: tmpfs
+    - name: remount dev-shm
+      mount:
+        path: /dev/shm
+        state: mounted
+        opts: remount,nodev,nosuid,noexec
+        fstype: tmpfs
+        src: tmpfs
 
   when: not mountline.found
 
@@ -84,7 +85,7 @@
 - name: disable service
   service:
     name: autofs
-    enabled: no
+    enabled: false
   when: "'autofs.service' in services"
 
 # this is included with ubuntu
@@ -101,22 +102,22 @@
 - name: add fs line to sysctl
   lineinfile:
     dest: /etc/sysctl.conf
-    line: "{{ item }}"
-  with_items: 
+    line: '{{ item }}'
+  with_items:
     - fs.suid_dumpable = 0
     - kernel.sysrq = 0
     - kernel.randomize_va_space = 2
 
 - name: set fs.dumapable to 0
   sysctl:
-    name: "{{ item.key }}"
-    value: "{{ item.value }}"
-    sysctl_set: yes
+    name: '{{ item.key }}'
+    value: '{{ item.value }}'
+    sysctl_set: true
     state: present
-  with_dict: "{{ sysctl_config }}"
+  with_dict: '{{ sysctl_config }}'
 
 - name: check if prelink exits
-  stat: 
+  stat:
     path: /usr/bink/prelink
   register: prelink
 
@@ -125,13 +126,13 @@
   when: prelink.stat.exists == true
 
 - name: remove prelink
-  apt: 
+  apt:
     name: prelink
     state: absent
 
 - name: delete motd files
   file:
-    path: "/etc/update-motd.d/{{ item }}"
+    path: /etc/update-motd.d/{{ item }}
     state: absent
   with_items:
     - 10-help-text
@@ -150,7 +151,7 @@
     mode: '0755'
 
 - name: check if motd file exists
-  stat: 
+  stat:
     path: /etc/motd
   register: motd
 
@@ -165,16 +166,16 @@
 
 - name: create issue files
   copy:
-    dest: "/etc/{{ item }}"
+    dest: /etc/{{ item }}
     content: Authorized uses only. All activity may be monitored and reported
     owner: root
     group: root
     mode: '0644'
-  with_items: 
+  with_items:
     - issue
     - issue.net
 
-- name: delete xinetd.conf 
+- name: delete xinetd.conf
   file:
     path: /etc/xinetd.conf
     state: absent
@@ -185,17 +186,17 @@
     state: absent
 
 - name: remove prelink
-  apt: 
-    pkg: 
+  apt:
+    pkg:
       - openbsd-inetd
       - xserver-xorg
     state: absent
 
 - name: disable services
   service:
-    name: "{{ item }}"
-    enabled: no
-  when: "item in services"
+    name: '{{ item }}'
+    enabled: false
+  when: item in services
   with_items:
     - avahi-daemon
     - cups
@@ -217,7 +218,7 @@
 - name: mask rpcbind
   systemd:
     name: rpcbind
-    masked: yes
+    masked: true
 
 - name: remove packages
   apt:
@@ -248,7 +249,7 @@
 - name: Add lines to disabled_protocol
   lineinfile:
     dest: /etc/modprobe.d/disabled_protocols.conf
-    line: "install {{ item }} /bin/true"
+    line: install {{ item }} /bin/true
   with_items:
     - dccp
     - sctp
@@ -258,7 +259,7 @@
 - name: enable auditd on boot
   lineinfile:
     path: /etc/default/grub
-    regexp: '^GRUB_CMDLINE_LINUX='
+    regexp: ^GRUB_CMDLINE_LINUX=
     line: GRUB_CMDLINE_LINUX="audit=1"
   register: grub
 
@@ -269,18 +270,18 @@
 - name: enable rsyslog
   service:
     name: rsyslog
-    enabled: yes
+    enabled: true
 
 - name: FileCreateMode in rsyslog
   lineinfile:
     path: /etc/rsyslog.conf
-    regexp: '^$FileCreateMode'
+    regexp: ^$FileCreateMode
     line: $FileCreateMode 0640"
 
 - name: enable cron service
   service:
     name: cron
-    enabled: yes
+    enabled: true
 
 - name: change crontab mode
   file:
@@ -289,7 +290,7 @@
 
 - name: change cron dir mode
   file:
-    path: "/etc/cron.{{ item }}"
+    path: /etc/cron.{{ item }}
     state: directory
     mode: '0700'
   with_items:
@@ -298,10 +299,10 @@
     - weekly
     - monthly
     - d
-  
+
 - name: delete .deny files
   file:
-    path: "/etc/{{ item }}.deny"
+    path: /etc/{{ item }}.deny
     state: absent
   with_items:
     - cron
@@ -314,7 +315,7 @@
 
 - name: create .allow files
   file:
-    path: "/etc/{{ item }}.allow"
+    path: /etc/{{ item }}.allow
     owner: root
     group: root
     state: touch
@@ -327,20 +328,20 @@
 - name: prevent access to su
   lineinfile:
     dest: /etc/pam.d/su
-    line: "auth required pam_wheel.so"
+    line: auth required pam_wheel.so
 
 - name: change mode of passwd and group files
   file:
-    path: "/etc/{{ item.name }}"
+    path: /etc/{{ item.name }}
     mode: '{{ item.mode }}'
   with_items:
-    - { "name": "passwd", "mode": "0644" }
-    - { "name": "passwd-", "mode": "0644" }
-    - { "name": "group", "mode": "0644" }
-    - { "name": "group-", "mode": "0644" }
-    - { "name": "shadow", "mode": "0640" }
-    - { "name": "shadow-", "mode": "0640" }
-    - { "name": "gshadow", "mode": "0640" }
-    - { "name": "gshadow-", "mode": "0640" }
+    - {name: passwd, mode: '0644'}
+    - {name: passwd-, mode: '0644'}
+    - {name: group, mode: '0644'}
+    - {name: group-, mode: '0644'}
+    - {name: shadow, mode: '0640'}
+    - {name: shadow-, mode: '0640'}
+    - {name: gshadow, mode: '0640'}
+    - {name: gshadow-, mode: '0640'}
 
 # - include_tasks: inspec.yaml
