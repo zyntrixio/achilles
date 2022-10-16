@@ -32,4 +32,4 @@ prod-rabbitmq2 ansible_host=prod-rabbitmq2.uksouth.bink.host
 ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
 
 [vpn]
-wireguard ansible_host=wireguard.uksouth.bink.sh
+wireguard ansible_host=wireguard.core.uksouth.bink.host

@@ -30,17 +30,6 @@
     users: '{{ wireguard_users }}'
   notify: wireguard
 
-- name: populate wireguard user
-  template:
-    src: users.csv.j2
-    dest: /etc/wireguard/users.csv
-    owner: root
-    group: root
-    mode: '0640'
-  vars:
-    users: '{{ wireguard_users }}'
-  notify: wireguard
-
 - name: update cifs-utils
   apt:
     name: cifs-utils
@@ -51,8 +40,8 @@
     name: '{{ item }}'
     state: directory
   with_items:
-    - /mount/binkuksouthwireguard
-    - /mount/binkuksouthwireguard/users
+    - /mnt/binkuksouthwireguard
+    - /mnt/binkuksouthwireguard/users
 
 - name: install mount service scripts
   copy:
@@ -60,19 +49,20 @@
     dest: /etc/systemd/system/{{ item }}
     mode: '0644'
   with_items:
-    - mount-binkuksouthwireguard-users.mount
-    - mount-binkuksouthwireguard-users.automount
+    - mnt-binkuksouthwireguard-users.mount
+    - mnt-binkuksouthwireguard-users.automount
 
 - name: enable automount service
-  service:
-    name: mount-binkuksouthwireguard-users.automount
+  systemd:
+    name: mnt-binkuksouthwireguard-users.automount
+    daemon-reload: true
     enabled: true
     state: started
 
 - name: create files for each user
   template:
     src: users.conf.j2
-    dest: /mount/binkuksouthwireguard/users/{{ item.name }}.conf
+    dest: /mnt/binkuksouthwireguard/users/{{ item.name }}.conf
     owner: root
     group: root
     mode: '0644'
