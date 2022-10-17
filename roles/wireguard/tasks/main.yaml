@@ -9,6 +9,7 @@
   systemd:
     name: wg-quick@wg0
     enabled: true
+    daemon_reload: true
 
 - name: add ipforward in wiregard conf
   copy:
@@ -62,7 +63,7 @@
 - name: enable automount service
   systemd:
     name: mnt-binkuksouthwireguard-users.automount
-    daemon-reload: true
+    daemon_reload: true
     enabled: true
     state: started
 
