@@ -4,6 +4,11 @@
     name: wireguard
     update_cache: true
     state: present
+  
+- name: enable wireguard
+  systemd:
+    name: wg-quick@wg0
+    enabled: true
 
 - name: add ipforward in wiregard conf
   copy:
@@ -28,7 +33,9 @@
   vars:
     server_private_key: '{{ wireguard_server_private_key }}'
     users: '{{ wireguard_users }}'
-  notify: wireguard
+  notify: 
+  - restart wireguard
+  - restart automount
 
 - name: update cifs-utils
   apt:
