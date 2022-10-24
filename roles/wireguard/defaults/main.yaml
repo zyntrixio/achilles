@@ -376,8 +376,8 @@ wireguard_users: [
   {
     name: 'rupal_patel',
     ip: '10.10.10.85',
-    private: 'QF/v8RibY2I7S/ZlYJKua2U8CsbD8AyWXhgGQWUQM2Y=',
-    public: 'ddSBJCgdT26W80iMDndhJU1JjsjTuairzV7aDZg9rWQ=',
+    private: 'CFwnzEHhOlAa5ujGqXJIB/+nyVlViBU4Ee40+Qw2N30=',
+    public: 'rbdvmiZCPt56rLNrNGOprfYJGlBrTHTa+IgeBkB7I3s=',
   },
   {
     name: 'sam_hedges',
