@@ -19,3 +19,10 @@
   become: true
   roles:
     - role: rabbitmq
+
+- name: ARA
+  hosts: ara
+  become: true
+  roles:
+    - role: docker
+    - role: ara
