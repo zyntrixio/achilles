@@ -382,8 +382,8 @@ wireguard_users: [
   {
     name: 'sam_hedges',
     ip: '10.10.10.86',
-    private: 'YH5NrOEEF2VUkOkd/np5dkRB4lzv1Y20a2fL7yhHvlQ=',
-    public: 'v7jq4i9c+WJ5+nDNFuJgim9aDnDNUJuvk+k2Sp+QXx0=',
+    private: 'oF0fBULLMG92kqmqMpvpA/bxiZzqXUtwgXLr0eQYOFM=',
+    public: 'jj7PCTuGZ9TmKoVPk7RomFtA4SCV2IwXUD2QXW2+eiE=',
   },
   {
     name: 'joe_kurowski',

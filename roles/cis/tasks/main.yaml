@@ -83,9 +83,10 @@
   service_facts:
 
 - name: Disable Service
-  service:
+  systemd:
     name: autofs
     enabled: false
+    daemon_reload: true
   when: "'autofs.service' in services"
 
 - name: Add Hard Limit to File
@@ -187,9 +188,10 @@
     state: absent
 
 - name: Disable Services
-  service:
+  systemd:
     name: '{{ item }}'
     enabled: false
+    daemon_reload: true
   when: item in services
   with_items:
     - avahi-daemon
@@ -213,6 +215,7 @@
   systemd:
     name: rpcbind
     masked: true
+    daemon_reload: true
 
 - name: Remove Packages
   apt:
@@ -262,9 +265,10 @@
   when: grub.changed
 
 - name: Enable rsyslog
-  service:
+  systemd:
     name: rsyslog
     enabled: true
+    daemon_reload: true
 
 - name: Add FileCreateMode in rsyslog
   lineinfile:
@@ -273,9 +277,10 @@
     line: $FileCreateMode 0640"
 
 - name: Enable Cron Service
-  service:
+  systemd:
     name: cron
     enabled: true
+    daemon_reload: true
 
 - name: Change Crontab Mode
   file:

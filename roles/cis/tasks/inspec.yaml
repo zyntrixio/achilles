@@ -48,12 +48,13 @@
     - inspec.timer
 
 - name: start inspec service
-  service:
+  systemd:
     name: inspec.service
     enabled: true
+    daemon_reload: true
 
 - name: start inspec timer
-  service:
+  systemd:
     name: inspec.timer
     state: started
     enabled: true
