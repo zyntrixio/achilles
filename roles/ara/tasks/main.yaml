@@ -17,6 +17,7 @@
     owner: root
     group: root
     mode: '0770'
+  register: settings
 
 - name: Pull ARA Docker image
   community.docker.docker_image:
@@ -35,3 +36,4 @@
       - "8000:8000"
     volumes:
       - /home/{{ ansible_user }}/.ara/server:/opt/ara:z
+  when: settings.changed

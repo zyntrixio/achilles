@@ -1,18 +1,18 @@
 ---
-- name: Remove disabled users # userdel --remove
+- name: Remove Disabled Users # userdel --remove
   user:
     name: '{{ item }}'
     state: absent # removes user
     remove: true # removes dir
   loop: '{{ users_disabled }}'
 
-- name: Create group for active users
+- name: Create Group for Active Users
   group:
     name: '{{ item.name }}'
     state: present
   loop: '{{ users_active }}'
 
-- name: Create active users
+- name: Create Active Users
   user:
     name: '{{ item.name }}'
     uid: '{{ item.id }}'
@@ -22,13 +22,13 @@
     home: /home/{{ item.name }}
   loop: '{{ users_active }}'
 
-- name: Change home directory permissions
+- name: Change Home Directory Permissions
   file:
     dest: /home/{{ item.name }}
     mode: '0750'
   loop: '{{ users_active }}'
 
-- name: Create ssh dir
+- name: Create .ssh Dir
   file:
     path: /home/{{ item.name }}/.ssh
     state: directory
@@ -37,7 +37,7 @@
     mode: '0700'
   loop: '{{ users_active }}'
 
-- name: Create config file
+- name: Create Config File
   copy:
     dest: /home/{{ item.name }}/.ssh/config
     owner: '{{ item.name }}'
@@ -48,7 +48,7 @@
       ServerAliveInterval 10
   loop: '{{ users_active }}'
 
-- name: Create authorised key files
+- name: Create Authorised Key Files
   get_url:
     url: https://github.com/{{ item.github_username }}.keys
     dest: /home/{{ item.name }}/.ssh/authorized_keys
@@ -57,7 +57,7 @@
     mode: '0600'
   loop: '{{ users_active }}'
 
-- name: add .zshrc file
+- name: Add .zshrc File
   copy:
     src: .zshrc
     dest: /home/{{ item.name }}/.zshrc
@@ -66,7 +66,7 @@
     mode: '0644'
   loop: '{{ users_active }}'
 
-- name: add google-authenticator file
+- name: Add Google Authenticator File
   template:
     src: google_authenticator.j2
     dest: /home/{{ item.name }}/.google_authenticator
@@ -77,7 +77,7 @@
     seed: '{{ item.otpseed }}'
   loop: '{{ users_active }}'
 
-- name: add .zshrc for root user
+- name: Add .zshrc for Root User
   copy:
     src: .zshrc
     dest: /root/.zshrc
@@ -85,13 +85,13 @@
     group: root
     mode: '0644'
 
-- name: add pam.d file
+- name: Add pam.d File
   copy:
     src: pam.d_sudo
     dest: /etc/pam.d/sudo
 
 - block:
-    - name: Template sshd config
+    - name: Template sshd Config
       template:
         src: sshd_config.j2
         dest: /etc/ssh/sshd_config
@@ -105,7 +105,7 @@
         kexalgorithms: '{{ ssh_kexalgorithms }}'
       notify: sshd
 
-    - name: Install packages
+    - name: Install Packages
       apt:
         pkg:
           - python3-pip
@@ -113,29 +113,29 @@
         state: present
         update_cache: true
 
-    - name: Install azure blob
+    - name: Install Azure Blob
       pip:
         name: azure-storage-blob==12.5.0
 
-    - name: Install inotify
+    - name: Install Inotify
       pip:
         name: inotify==0.2.10
 
-    - name: Add pysftp service file
+    - name: Add pysftp Service File
       template: src=sftp/pysftp.service dest=/etc/systemd/system/pysftp.service
         mode=0644
       notify: reload systemctl
 
-    - name: create sftp dir
+    - name: Create sftp Dir
       file:
         path: /opt/sftp/
         state: directory
 
-    - name: Set fact
+    - name: Set Fact
       set_fact:
         users_sftp_upload: "{{ users_stfp | selectattr('upload', 'defined') }}"
 
-    - name: Add config.json file
+    - name: Add config.json File
       template:
         src: sftp/config.json.j2
         dest: /opt/sftp/config.json
@@ -146,7 +146,7 @@
         sftpusers: '{{ users_sftp_upload }}'
       notify: pysftp
 
-    - name: Add uploader.py file
+    - name: Add Uploader.py File
       copy:
         src: templates/sftp/uploader.py
         dest: /opt/sftp/uploader.py
@@ -155,7 +155,7 @@
         mode: '0700'
       notify: pysftp
 
-    - name: Add public keys
+    - name: Add Public Keys
       copy:
         src: ssh/{{ item.name }}
         dest: /etc/ssh/{{ item.name }}
@@ -172,12 +172,12 @@
         - {name: ssh_host_ed25519_key, mode: '0600'}
         - {name: ssh_host_rsa_key, mode: '0600'}
 
-    - name: Create stfp groups
+    - name: Create stfp Groups
       group:
         name: '{{ item.name }}'
       loop: '{{ users_stfp }}'
 
-    - name: Create stfp users
+    - name: Create stfp Users
       user:
         name: '{{ item.name }}'
         uid: '{{ item.id }}'
@@ -186,7 +186,8 @@
         group: '{{ item.name }}'
         home: /home/{{ item.name }}
       loop: '{{ users_stfp }}'
-    - name: Create ssh dir
+
+    - name: Create .ssh Dir
       file:
         path: /home/{{ item.name }}/.ssh
         state: directory
@@ -195,7 +196,7 @@
         mode: '0700'
       loop: '{{ users_stfp }}'
 
-    - name: Create authorized_keys file
+    - name: Create Authorized Keys File
       copy:
         dest: /home/{{ item.name }}/.ssh/authorized_keys
         content: '{{ item.ssh_key }}'
@@ -204,7 +205,7 @@
         mode: '0600'
       loop: '{{ users_stfp }}'
 
-    - name: create upload directory
+    - name: Create Upload Directory
       file:
         path: /home/{{ item.name }}/uploads
         state: directory

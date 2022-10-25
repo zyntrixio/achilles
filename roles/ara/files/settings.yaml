@@ -16,7 +16,7 @@ default:
   CORS_ORIGIN_WHITELIST:
   - http://127.0.0.1:8000
   - http://localhost:3000
-  - http://ara.do.bink.sh:8000
+  - https://ara.do.bink.sh
   CSRF_TRUSTED_ORIGINS: []
   DATABASE_CONN_MAX_AGE: 0
   DATABASE_ENGINE: django.db.backends.sqlite3

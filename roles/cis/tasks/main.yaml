@@ -1,45 +1,45 @@
 ---
-- name: Update and upgrade apt packages
+- name: Update and Upgrade Apt Packages
   become: true
   apt:
     update_cache: true
     cache_valid_time: 86400
 
-- name: Add core packages
+- name: Add Core Packages
   apt:
     pkg:
       - clamav
       - clamav-daemon
 
-- name: check if disabled file_system file exists
+- name: Check if Disabled Filesystems File Exists
   stat:
     path: /etc/modprobe.d/disabled_filesystems.conf
   register: disabled_file
 
-- name: create disabled file_system file
+- name: Create Disabled Filesystems File
   file:
     path: /etc/modprobe.d/disabled_filesystems.conf
     state: touch
     owner: root
     group: root
     mode: '0644'
-  when: disabled_file.stat.exists == False
+  when: disabled_file.stat.exists == false
 
-- name: check if dev-sec file exists
+- name: Check if Dev Sec File Exists
   stat:
     path: /etc/modprobe.d/dev-sec.conf
   register: dev_sec_file
 
-- name: create dev-sec file
+- name: Create Dev Sec File
   file:
     path: /etc/modprobe.d/dev-sec.conf
     state: touch
     owner: root
     group: root
     mode: '0644'
-  when: dev_sec_file.stat.exists == False
+  when: dev_sec_file.stat.exists == false
 
-- name: Add lines to dev-conf
+- name: Add Lnes to Dev Sec File
   lineinfile:
     dest: /etc/modprobe.d/dev-sec.conf
     line: install {{ item }} /bin/true
@@ -53,7 +53,7 @@
     - udf
     - vfat
 
-- name: check if mount line is present
+- name: Check if Mount Line is Present
   lineinfile:
     path: /etc/fstab
     regexp: ^tmpfs /dev/shm
@@ -63,13 +63,13 @@
   register: mountline
 
 - block:
-    - name: add mount line to fstab
+    - name: Add Mount Line to fstab
       lineinfile:
         dest: /etc/fstab
         line: tmpfs /dev/shm tmpfs nodev,nosuid,noexec 0 0
         state: present
 
-    - name: remount dev-shm
+    - name: Remount dev-shm
       mount:
         path: /dev/shm
         state: mounted
@@ -79,27 +79,21 @@
 
   when: not mountline.found
 
-- name: Get the list of services
+- name: Get the List of Services
   service_facts:
 
-- name: disable service
+- name: Disable Service
   service:
     name: autofs
     enabled: false
   when: "'autofs.service' in services"
 
-# this is included with ubuntu
-# - name: change mode of grub.cfg
-#   file:
-#     path: /boot/grub/grub.cfg
-#     mode: '0400'
-
-- name: add hard limit to file
+- name: Add Hard Limit to File
   lineinfile:
     dest: /etc/security/limits.conf
     line: '* hard core 0'
 
-- name: add fs line to sysctl
+- name: Add fs Line to sysctl
   lineinfile:
     dest: /etc/sysctl.conf
     line: '{{ item }}'
@@ -108,7 +102,7 @@
     - kernel.sysrq = 0
     - kernel.randomize_va_space = 2
 
-- name: set fs.dumapable to 0
+- name: Set fs.dumapable to 0
   sysctl:
     name: '{{ item.key }}'
     value: '{{ item.value }}'
@@ -116,21 +110,21 @@
     state: present
   with_dict: '{{ sysctl_config }}'
 
-- name: check if prelink exits
+- name: Check if Prelink Exits
   stat:
     path: /usr/bink/prelink
   register: prelink
 
-- name: run prelink
+- name: Run Prelink
   command: prelink -ua
   when: prelink.stat.exists == true
 
-- name: remove prelink
+- name: Remove Prelink
   apt:
     name: prelink
     state: absent
 
-- name: delete motd files
+- name: Delete motd Files
   file:
     path: /etc/update-motd.d/{{ item }}
     state: absent
@@ -140,7 +134,7 @@
     - 90-updates-available
     - 91-release-upgrade
 
-- name: create disclaimer file
+- name: Create Disclaimer File
   copy:
     dest: /etc/update-motd.d/11-disclaimer
     content: |
@@ -150,21 +144,21 @@
     group: root
     mode: '0755'
 
-- name: check if motd file exists
+- name: Check if motd File Exists
   stat:
     path: /etc/motd
   register: motd
 
-- name: create motd file
+- name: Create motd File
   file:
     path: /etc/motd
     state: touch
     owner: root
     group: root
     mode: '0644'
-  when: motd.stat.exists == False
+  when: motd.stat.exists == false
 
-- name: create issue files
+- name: Create Issue Files
   copy:
     dest: /etc/{{ item }}
     content: Authorized uses only. All activity may be monitored and reported
@@ -175,24 +169,24 @@
     - issue
     - issue.net
 
-- name: delete xinetd.conf
+- name: Delete xinetd Conf
   file:
     path: /etc/xinetd.conf
     state: absent
 
-- name: delete xinetd dir
+- name: Delete xinetd Dir
   file:
     path: /etc/xinetd.d
     state: absent
 
-- name: remove prelink
+- name: Remove Prelink
   apt:
     pkg:
       - openbsd-inetd
       - xserver-xorg
     state: absent
 
-- name: disable services
+- name: Disable Services
   service:
     name: '{{ item }}'
     enabled: false
@@ -215,12 +209,12 @@
     - rsync
     - nis
 
-- name: mask rpcbind
+- name: Mask rpcbind
   systemd:
     name: rpcbind
     masked: true
 
-- name: remove packages
+- name: Remove Packages
   apt:
     pkg:
       - nis
@@ -232,21 +226,21 @@
       - auditd
     state: absent
 
-- name: check if disabled_protocols conf exists
+- name: Check if Disabled Protocols File Exists
   stat:
     path: /etc/modprobe.d/disabled_protocols.conf
   register: disabled_protocols
 
-- name: create disabled_protocols.conf
+- name: Create Disabled Protocols File
   file:
     path: /etc/modprobe.d/disabled_protocols.conf
     state: touch
     owner: root
     group: root
     mode: '0644'
-  when: disabled_protocols.stat.exists == False
+  when: disabled_protocols.stat.exists == false
 
-- name: Add lines to disabled_protocol
+- name: Add Lines to Disabled Protocols File
   lineinfile:
     dest: /etc/modprobe.d/disabled_protocols.conf
     line: install {{ item }} /bin/true
@@ -256,39 +250,39 @@
     - rds
     - tipc
 
-- name: enable auditd on boot
+- name: Enable Auditd on Boot
   lineinfile:
     path: /etc/default/grub
     regexp: ^GRUB_CMDLINE_LINUX=
     line: GRUB_CMDLINE_LINUX="audit=1"
   register: grub
 
-- name: update grub
+- name: Update Grub
   command: update-grub
   when: grub.changed
 
-- name: enable rsyslog
+- name: Enable rsyslog
   service:
     name: rsyslog
     enabled: true
 
-- name: FileCreateMode in rsyslog
+- name: Add FileCreateMode in rsyslog
   lineinfile:
     path: /etc/rsyslog.conf
     regexp: ^$FileCreateMode
     line: $FileCreateMode 0640"
 
-- name: enable cron service
+- name: Enable Cron Service
   service:
     name: cron
     enabled: true
 
-- name: change crontab mode
+- name: Change Crontab Mode
   file:
     path: /etc/crontab
     mode: '0600'
 
-- name: change cron dir mode
+- name: Change Cron Dir Mode
   file:
     path: /etc/cron.{{ item }}
     state: directory
@@ -300,7 +294,7 @@
     - monthly
     - d
 
-- name: delete .deny files
+- name: Delete .deny Files
   file:
     path: /etc/{{ item }}.deny
     state: absent
@@ -308,12 +302,12 @@
     - cron
     - at
 
-- name: check if .allow files exists
+- name: Check if .allow Files Exists
   stat:
     path: /etc/cron.allow
   register: allow
 
-- name: create .allow files
+- name: Create .allow Files
   file:
     path: /etc/{{ item }}.allow
     owner: root
@@ -325,12 +319,12 @@
     - at
   when: allow.stat.exists == False
 
-- name: prevent access to su
+- name: Prevent Access to su
   lineinfile:
     dest: /etc/pam.d/su
     line: auth required pam_wheel.so
 
-- name: change mode of passwd and group files
+- name: Change Mode of Passwd and Group Files
   file:
     path: /etc/{{ item.name }}
     mode: '{{ item.mode }}'
