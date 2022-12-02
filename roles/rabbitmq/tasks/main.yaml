@@ -4,41 +4,41 @@
     name: apt-transport-https
     state: present
 
-- name: Add erlang key
+- name: Add Erlang Key
   apt_key:
     url: https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/gpg.E495BB49CC4BBE5B.key
     state: present
 
-- name: Add erlang apt repo
+- name: Add Erlang Apt Repo
   apt_repository:
     repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/ubuntu
       {{ ansible_distribution_release }} main
     filename: erlang
     state: present
 
-- name: Add rabbitmq key
+- name: Add RabbitMQ Key
   apt_key:
     url: https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/gpg.9F4587F226208342.key
     state: present
 
-- name: Add rabbitmq apt repo
+- name: Add RabbitMQ Apt Repo
   apt_repository:
     repo: deb https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu
       {{ ansible_distribution_release }} main
     filename: rabbitmq
     state: present
 
-- name: Install rabbitmq
+- name: Install RabbitMQ
   apt:
     name: rabbitmq-server=3.10.8-1
     state: present
 
-- name: Hold rabbitmq
+- name: Hold RabbitMQ
   dpkg_selections:
     name: rabbitmq-server
     selection: hold
 
-- name: Add in certs
+- name: Add in Certs
   copy:
     src: certificates/{{ item }}
     dest: /etc/rabbitmq/{{ item }}
@@ -50,7 +50,7 @@
     - ca-bundle.pem
     - key.pem
 
-- name: Overwrite content of erlang cookie
+- name: Overwrite Content of Erlang Cookie
   copy:
     dest: /var/lib/rabbitmq/.erlang.cookie
     content: VNQMAWCGVEEOZPKIYFPU
@@ -59,7 +59,7 @@
     mode: '0400'
   notify: rabbitmq-server
 
-- name: copy enabled plugins and rabbitmq conf
+- name: Copy Enabled Plugins and RabbitMQ Conf
   copy:
     src: '{{ item }}'
     dest: /etc/rabbitmq/{{ item }}

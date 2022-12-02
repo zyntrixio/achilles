@@ -36,3 +36,6 @@ wireguard ansible_host=wireguard.core.uksouth.bink.host
 
 [vpn:vars]
 ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
+
+[ara]
+ara ansible_host=ara.do.bink.sh

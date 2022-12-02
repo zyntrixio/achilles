@@ -1,23 +1,23 @@
 ---
-- name: Remove 'node_exporter' package
+- name: Remove 'node_exporter' Package
   apt:
     name: prometheus-node-exporter
     state: absent
 
-- name: Create node exporter group
+- name: Create Node Exporter Group
   group:
     name: node_exporter
     system: true
     state: present
 
-- name: Create node_exporter user
+- name: Create Node Exporter User
   user:
     name: node_exporter
     system: true
     groups: node_exporter
     shell: /usr/sbin/nologin
 
-- name: Create node_exporter directories
+- name: Create Node Exporter Directories
   file:
     path: '{{ item }}'
     state: directory
@@ -38,19 +38,19 @@
     group: root
     remote_src: yes
 
-- name: Create symbolic link for node_exporter
+- name: Create Symbolic Link for Node Exporter
   file:
     src: /opt/node_exporter/{{ node_exporter_version }}/node_exporter
     dest: /usr/local/sbin/node_exporter
     state: link
 
-- name: Add node_exporter service file
+- name: Add Node Exporter Service File
   template:
     src: node_exporter.service
     dest: /etc/systemd/system/node_exporter.service
     mode: 0644
 
-- name: start node_exporter service
+- name: start Node Exporter Service
   systemd:
     name: node_exporter.service
     state: started
