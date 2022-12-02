@@ -6,6 +6,29 @@
     remove: true # removes dir
   loop: '{{ users_disabled }}'
 
+- name: Set Password Ageing Max Days
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^PASS_MAX_DAYS'
+    line: PASS_MAX_DAYS 99999
+
+- name: Set Password Ageing Min Days
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^PASS_MIN_DAYS'
+    line: PASS_MIN_DAYS 0
+
+- name: Set Password Ageing Warning Days
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^PASS_WARN_AGE'
+    line: PASS_WARN_AGE 7
+
+- name: add pam.d file
+  copy:
+    src: pam.d_sudo
+    dest: /etc/pam.d/sudo
+
 - name: Create Group for Active Users
   group:
     name: '{{ item.name }}'
@@ -85,11 +108,6 @@
     group: root
     mode: '0644'
 
-- name: Add pam.d File
-  copy:
-    src: pam.d_sudo
-    dest: /etc/pam.d/sudo
-
 - block:
     - name: Template sshd Config
       template:
@@ -99,10 +117,7 @@
         group: root
         mode: '0644'
       vars:
-        sftpusers: '{{ users_stfp }}'
-        ciphers: '{{ ssh_ciphers }}'
-        macs: '{{ ssh_macs }}'
-        kexalgorithms: '{{ ssh_kexalgorithms }}'
+        sftpusers: '{{ users_sftp }}'
       notify: sshd
 
     - name: Install Packages
@@ -115,7 +130,7 @@
 
     - name: Install Azure Blob
       pip:
-        name: azure-storage-blob==12.5.0
+        name: azure-storage-blob==12.14.1
 
     - name: Install Inotify
       pip:
@@ -126,6 +141,12 @@
         mode=0644
       notify: reload systemctl
 
+    - name: Start and Enable pysftp
+      ansible.builtin.systemd:
+        name: pysftp.service
+        state: started
+        enabled: yes
+
     - name: Create sftp Dir
       file:
         path: /opt/sftp/
@@ -133,7 +154,7 @@
 
     - name: Set Fact
       set_fact:
-        users_sftp_upload: "{{ users_stfp | selectattr('upload', 'defined') }}"
+        users_sftp_upload: "{{ users_sftp | selectattr('upload', 'defined') }}"
 
     - name: Add config.json File
       template:
@@ -175,7 +196,7 @@
     - name: Create stfp Groups
       group:
         name: '{{ item.name }}'
-      loop: '{{ users_stfp }}'
+      loop: '{{ users_sftp }}'
 
     - name: Create stfp Users
       user:
@@ -185,7 +206,16 @@
         create_home: true
         group: '{{ item.name }}'
         home: /home/{{ item.name }}
-      loop: '{{ users_stfp }}'
+      loop: '{{ users_sftp }}'
+
+    - name: Fix permissions on sftp user home directory
+      file:
+        path: /home/{{ item.name }}
+        state: directory
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+      loop: '{{ users_sftp }}'
 
     - name: Create .ssh Dir
       file:
@@ -194,7 +224,7 @@
         owner: '{{ item.name }}'
         group: '{{ item.name }}'
         mode: '0700'
-      loop: '{{ users_stfp }}'
+      loop: '{{ users_sftp }}'
 
     - name: Create Authorized Keys File
       copy:
@@ -203,7 +233,7 @@
         owner: '{{ item.name }}'
         group: '{{ item.name }}'
         mode: '0600'
-      loop: '{{ users_stfp }}'
+      loop: '{{ users_sftp }}'
 
     - name: Create Upload Directory
       file:
@@ -212,6 +242,6 @@
         owner: '{{ item.name }}'
         group: '{{ item.name }}'
         mode: '0700'
-      loop: '{{ users_stfp }}'
+      loop: '{{ users_sftp }}'
 
   when: ('sftp' in group_names)

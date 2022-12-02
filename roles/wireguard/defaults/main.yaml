@@ -439,4 +439,10 @@ wireguard_users: [
     private: 'OF5yJkNI8HcnQavz+0txO/ePomVrk7mVWAmen8o1pE4=',
     public: '1HcTLcr/uHkzDEIG7yT62BXf3S7vpF4v7An+PwdfuVc=',
   },
+  {
+    name: 'alanna_innes',
+    ip: '10.10.10.96',
+    private: 'QFul7D38k0fosBZCDfza0qzq75FcgmzQGYvgn9YANE0=',
+    public: 'U6GBu9kzclOKPLkw6loGtcOtfllpRnjsJDHwJ2kOASE=',
+  },
 ]
