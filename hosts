@@ -24,9 +24,9 @@ sftp1 ansible_host=sftp1.core.uksouth.bink.host
 ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"
 
 [rabbitmq]
-prod-rabbitmq0 ansible_host=prod-rabbitmq0.uksouth.bink.host
-prod-rabbitmq1 ansible_host=prod-rabbitmq1.uksouth.bink.host
-prod-rabbitmq2 ansible_host=prod-rabbitmq2.uksouth.bink.host
+amqp0 ansible_host=amqp0.prod.uksouth.bink.host
+amqp1 ansible_host=amqp1.prod.uksouth.bink.host
+amqp2 ansible_host=amqp2.prod.uksouth.bink.host
 
 [rabbitmq:vars]
 ansible_ssh_common_args = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J bastion"

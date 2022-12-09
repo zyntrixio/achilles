@@ -30,7 +30,7 @@
 
 - name: Install RabbitMQ
   apt:
-    name: rabbitmq-server=3.10.8-1
+    name: rabbitmq-server=3.11.4-1
     state: present
 
 - name: Hold RabbitMQ
