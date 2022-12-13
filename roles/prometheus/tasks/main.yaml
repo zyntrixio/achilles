@@ -29,7 +29,7 @@
     - /opt/node_exporter/{{ node_exporter_version }}
 
 - name: Download Node Exporter
-  ansible.builtin.unarchive:
+  unarchive:
     src: '{{ node_exporter_url }}'
     dest: /opt/node_exporter/{{ node_exporter_version }}
     extra_opts:

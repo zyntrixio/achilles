@@ -23,3 +23,7 @@
       - openssh-server
       - openssh-client
       - libpam-google-authenticator
+      - ca-certificates
+      - gnupg2
+      - lsb-release
+      - ubuntu-keyring

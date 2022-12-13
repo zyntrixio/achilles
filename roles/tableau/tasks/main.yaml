@@ -1,0 +1,68 @@
+---
+## Set Up Postgres
+- name: Add Postgres Repository
+  apt_repository:
+    filename: pgdg
+    repo: deb https://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
+    state: present
+
+- name: Add a Postgres Apt Key
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: Install Postgres Client 13
+  apt:
+    name: postgresql-client-13
+    state: present
+    update_cache: true
+
+## Setup Postgres Driver
+- name: Download Postgres Driver
+  get_url:
+    url: https://downloads.tableau.com/drivers/linux/postgresql/postgresql-42.3.3.jar
+    dest: /opt/tableau/tableau_driver/jdbc/postgresql-42.3.3.jar
+
+
+## Setup NGINX
+- name: Add a NGINX Apt Key
+  apt_key:
+    url: https://nginx.org/keys/nginx_signing.key
+    state: present
+
+- name: Add NGINX Apt Repo
+  apt_repository:
+    repo: deb https://nginx.org/packages/ubuntu {{ ansible_distribution_release }} nginx
+    filename: nginx
+    state: present
+
+- name: Copy NGINX Preferences file
+  copy:
+    src: 99nginx
+    dest: /etc/apt/preferences.d/99nginx
+    mode: '0644'
+
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+    update_cache: true
+
+- name: Enable & Start NGINX
+  systemd:
+    name: nginx.service
+    state: started
+    enabled: true
+    daemon_reload: true
+
+## Setup Certbot
+- name: Install Certbot
+  community.general.snap:
+    name: certbot
+    clasic: true
+
+- name: Create Symbolic Link
+  file:
+    src: /snap/bin/certbot
+    dest: /usr/bin/certbot
+    state: link

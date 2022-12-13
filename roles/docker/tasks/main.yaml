@@ -1,7 +1,6 @@
 - name: Install required system packages
   apt:
     pkg:
-      - ca-certificates
       - python3-pip
       - python3-setuptools
     state: latest

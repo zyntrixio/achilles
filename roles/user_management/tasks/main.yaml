@@ -7,19 +7,19 @@
   loop: '{{ users_disabled }}'
 
 - name: Set Password Ageing Max Days
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/login.defs
     regexp: '^PASS_MAX_DAYS'
     line: PASS_MAX_DAYS 99999
 
 - name: Set Password Ageing Min Days
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/login.defs
     regexp: '^PASS_MIN_DAYS'
     line: PASS_MIN_DAYS 0
 
 - name: Set Password Ageing Warning Days
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/login.defs
     regexp: '^PASS_WARN_AGE'
     line: PASS_WARN_AGE 7
@@ -142,7 +142,7 @@
       notify: reload systemctl
 
     - name: Start and Enable pysftp
-      ansible.builtin.systemd:
+      systemd:
         name: pysftp.service
         state: started
         enabled: yes
