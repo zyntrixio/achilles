@@ -445,4 +445,10 @@ wireguard_users: [
     private: 'QFul7D38k0fosBZCDfza0qzq75FcgmzQGYvgn9YANE0=',
     public: 'U6GBu9kzclOKPLkw6loGtcOtfllpRnjsJDHwJ2kOASE=',
   },
+  {
+    name: 'lucia_codrean',
+    ip: '10.10.10.97',
+    private: 'iMEm2YOzzdjn9lQz4eg8+u0PxZDrFu6TsH7oY4IOf2k=',
+    public: 'ZdCB6IWdmd8NoBenOcIZf1q3AGVTx7fb7aNKkPhSBh0=',
+  },
 ]
