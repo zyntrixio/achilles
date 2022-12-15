@@ -50,7 +50,7 @@
     dest: /etc/systemd/system/node_exporter.service
     mode: 0644
 
-- name: start Node Exporter Service
+- name: Start Node Exporter Service
   systemd:
     name: node_exporter.service
     state: started

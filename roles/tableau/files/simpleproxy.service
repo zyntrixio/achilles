@@ -1,0 +1,12 @@
+[Unit]
+Description=simpleproxy
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/simpleproxy -L 0.0.0.0:5432 -R bink-uksouth-tableau.postgres.database.azure.com:5432 -v
+
+[Install]
+WantedBy=multi-user.target

@@ -23,7 +23,6 @@
     url: https://downloads.tableau.com/drivers/linux/postgresql/postgresql-42.3.3.jar
     dest: /opt/tableau/tableau_driver/jdbc/postgresql-42.3.3.jar
 
-
 ## Setup NGINX
 - name: Add a NGINX Apt Key
   apt_key:
@@ -66,3 +65,63 @@
     src: /snap/bin/certbot
     dest: /usr/bin/certbot
     state: link
+
+## Setup Tableau
+- name: Install Core Packages for Tableau
+  apt:
+    pkg:
+      - fontconfig
+      - net-tools
+      - gdb
+      - chrpath
+      - freeglut3
+      - libegl1-mesa
+      - libxcomposite1
+      - libxcursor1
+      - libxi6
+      - libxrandr2
+      - libxrender1
+      - libxtst6
+      - lsb-core
+
+- name: Download Tableau Packages
+  get_url:
+    url: https://downloads.tableau.com/esdalt/{{ tableau_version | replace('-', '.') }}/tableau-server-{{ tableau_version }}_amd64.deb
+    dest: /home/{{ ansible_user }}/tableau-server-{{ tableau_version }}_amd64.deb
+
+- name: Install Tableau
+  apt: deb="/home/{{ ansible_user }}/tableau-server-{{ tableau_version }}_amd64.deb"
+
+- name: Initialize TSM 
+  shell: /opt/tableau/tableau_server/packages/scripts.*/initialize-tsm --accepteula
+
+- name: Add User Tadmin
+  user:
+    name: tadmin
+    groups: tableau,tsmadmin
+
+- name: Source Tableau Server Scripts
+  lineinfile:
+    path: /root/.zshrc
+    line: . /etc/profile.d/tableau_server.sh
+
+
+## Setup Simpleproxy
+- name: Install Simple Proxy
+  apt:
+    name: simpleproxy
+    state: present
+    update_cache: true
+
+- name: Add Simple Proxy Service File
+  template:
+    src: simpleproxy.service
+    dest: /etc/systemd/system/simpleproxy.service
+    mode: 0644
+
+- name: Start Simple Proxy Service
+  systemd:
+    name: simpleproxy.service
+    state: started
+    daemon_reload: true
+    enabled: true
