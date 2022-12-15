@@ -1,14 +1,14 @@
 ---
 ## Set Up Postgres
+- name: Add a Postgres Apt Key
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
 - name: Add Postgres Repository
   apt_repository:
     filename: pgdg
     repo: deb https://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main
-    state: present
-
-- name: Add a Postgres Apt Key
-  apt_key:
-    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
     state: present
 
 - name: Install Postgres Client 13
@@ -21,7 +21,7 @@
 - name: Download Postgres Driver
   get_url:
     url: https://downloads.tableau.com/drivers/linux/postgresql/postgresql-42.3.3.jar
-    dest: /opt/tableau/tableau_driver/jdbc/postgresql-42.3.3.jar
+    dest: /home/{{ ansible_user }}/postgresql-42.3.3.jar
 
 ## Setup NGINX
 - name: Add a NGINX Apt Key
@@ -58,7 +58,7 @@
 - name: Install Certbot
   community.general.snap:
     name: certbot
-    clasic: true
+    classic: true
 
 - name: Create Symbolic Link
   file:
@@ -105,6 +105,11 @@
     path: /root/.zshrc
     line: . /etc/profile.d/tableau_server.sh
 
+- name: Move Postgres from Home Directory into Tableau
+  copy:
+    src: /home/{{ ansible_user }}/postgresql-42.3.3.jar
+    dest: /opt/tableau/tableau_driver/jdbc/postgresql-42.3.3.jar
+    remote_src: true
 
 ## Setup Simpleproxy
 - name: Install Simple Proxy

@@ -26,3 +26,9 @@
   roles:
     - role: docker
     - role: ara
+
+- name: Tableau
+  hosts: tableau
+  become: true
+  roles:
+    - role: tableau
