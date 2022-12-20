@@ -248,22 +248,10 @@ wireguard_users: [
     public: 'VmHY7lfskRAFbN6GIge5Jd2dKM5kRiYZNG6EBqh6zxE=',
   },
   {
-    name: 'bola_ogundeji',
-    ip: '10.10.10.62',
-    private: '0AekldNh2upaG5aCHTpzfip5xAovy7Li55ZRIwrrb38=',
-    public: '5J1zSq6nDyCxVLCOhwr+Z21wQDRWIghidfRsVIMHvwA=',
-  },
-  {
     name: 'jess_jones',
     ip: '10.10.10.63',
     private: 'SCbXwlgwkyR4CS+AAQqsmBZYT4xwTxP5CdS0OZLw/kQ=',
     public: 'e4LQxJOBtsfS4m/EY1sqIbj+j1pkzNj9NL+QparyXEs=',
-  },
-  {
-    name: 'parinita_khond',
-    ip: '10.10.10.64',
-    private: 'wEUI8bsA4MFizm8EZWEZ0wOkVEI6JklBnoAWA3PIP0w=',
-    public: 'aA+pqFN2YHTY06mLfJK4XibR0+LgSQTAlwIg+p90Cg4=',
   },
   {
     name: 'lewis_hamilton',
@@ -308,12 +296,6 @@ wireguard_users: [
     public: 'XfzaCqcpo9UUHBeArb1j24oLrbXYqypqB2vL+K72URU=',
   },
   {
-    name: 'martin_franklin',
-    ip: '10.10.10.74',
-    private: 'ANFRhgZ5LU9E/iKFVwyDgThDqlhEkifI6GTuJYsKVls=',
-    public: 'nXzZ+Q2ce4ArwjdecEx29T9gGhlAYWNG3JwMDqKxyzA=',
-  },
-  {
     name: 'haffi_mazhar',
     ip: '10.10.10.75',
     private: 'UHeuq+7C5vlxXPtkw1+G8SonbSUTUh68gfdm0c5TNHI=',
@@ -338,12 +320,6 @@ wireguard_users: [
     public: 'LSVNfUlgOO6a2hk3ZlBWcMSlCq+OhDXQwKvD6ZcQgjo=',
   },
   {
-    name: 'terelle_dokyi',
-    ip: '10.10.10.79',
-    private: 'MM9lY263j7McIXSSGKLIScJnFfyHRi2FpybJ1yn9V1Q=',
-    public: 'KRLvx0wTnc1gnURvZ3QlieX1ZV0hShsKykAwr+3nMGM=',
-  },
-  {
     name: 'josh_lister',
     ip: '10.10.10.80',
     private: 'YObUj55m2tTS+dI8MAvtti+I0Uc+EcHAGdd1ekcDvH8=',
@@ -354,12 +330,6 @@ wireguard_users: [
     ip: '10.10.10.81',
     private: '4N1djeSt0jz40CzAoG/dHcxMYqGwAOlGeMuXnpqQ/0o=',
     public: 'oAjLB5wShBE3+S1sm98j90fkgZsEpEb9RJk5RDAOAUg=',
-  },
-  {
-    name: 'david_felce',
-    ip: '10.10.10.82',
-    private: 'gBkveQJhFD518jLX7o2pDEx0j72mkv079HrHwAPG9Ew=',
-    public: 'AosXYMKB3BvY4EB/NTdImYUvUqyTB4Onzegtbs89qVg=',
   },
   {
     name: 'thenuja_viknarajah',
