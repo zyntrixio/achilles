@@ -214,8 +214,8 @@ wireguard_users: [
   {
     name: 'michal_jozwiak',
     ip: '10.10.10.54',
-    private: 'IMy58idqhTxA7NCFa20OY4eVtcBIumP4UmgiWaFQfFM=',
-    public: 'iM0eCnz6gdI0tKcT5qUrtvNvutymUBExW9FB6lsGljo=',
+    private: 'qPM+GQjNaELC39JpTwtUxQ19mGn7GLQlOirvjAEVn0Q=',
+    public: 'bdlrw65trBzXrmzAaYwIZN7sUWm8EBasETfYYKRSZBc=',
   },
   {
     name: 'simon_tunmore',
