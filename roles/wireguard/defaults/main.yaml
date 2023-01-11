@@ -170,12 +170,6 @@ wireguard_users: [
     public: 'fcO6diaZLmKy/r7N0AdGdHdrilPMV9m9zzErUxXp12k=',
   },
   {
-    name: 'tehmoor_ulhaq',
-    ip: '10.10.10.38',
-    private: 'CP+u1MCNdRj7U3Eurh5Gm+QNAhAbu/98HDcKie3jt1M=',
-    public: 'PF+EFjl4q+RalGhdxSRnwQDvDFWLGzUImx35cGKbHlU=',
-  },
-  {
     name: 'tony_truong',
     ip: '10.10.10.41',
     private: 'oDKqxoxanbrWxpnnA9TSz+8+XI4YYVANaWE2f4zlflY=',
@@ -218,12 +212,6 @@ wireguard_users: [
     public: 'bdlrw65trBzXrmzAaYwIZN7sUWm8EBasETfYYKRSZBc=',
   },
   {
-    name: 'simon_tunmore',
-    ip: '10.10.10.55',
-    private: '4GoxzIgCAzwdN/0xwuwKfxEEfLlDR/vQWZg1rWRmAH8=',
-    public: 'daZ2stNqXoJAWnEWksZYQV6aZxgdgTuSzyQ8Y/uKYhQ=',
-  },
-  {
     name: 'joshua_best',
     ip: '10.10.10.56',
     private: '8EKWIOoa1IOxj0c6Ab3BVBrd7/WA81sRqwcvU6yTT1Q=',
@@ -234,12 +222,6 @@ wireguard_users: [
     ip: '10.10.10.57',
     private: '+LtGgxru94LEeX+JHfCgD2yAyvDv0diaDl4AfT4woUM=',
     public: 'ZsBcrIfm5VUjAvqSKMZSKweg+GwpbxqqxWb3kUEpml4=',
-  },
-  {
-    name: 'george_odonnell',
-    ip: '10.10.10.58',
-    private: 'QLA9mN7b1D4/fMHQFBUcMZxKZB3NL1Pwvquk9pk6Jl4=',
-    public: 'D3d4yyOp8V0eC0y/dz+1dEHkoo82T39awhu3Du2sJW0=',
   },
   {
     name: 'bula_raghavan',
@@ -320,12 +302,6 @@ wireguard_users: [
     public: 'LSVNfUlgOO6a2hk3ZlBWcMSlCq+OhDXQwKvD6ZcQgjo=',
   },
   {
-    name: 'josh_lister',
-    ip: '10.10.10.80',
-    private: 'YObUj55m2tTS+dI8MAvtti+I0Uc+EcHAGdd1ekcDvH8=',
-    public: 'wRqqsOLN1NnqIM9zvg9pPOZE9qwQ5u3QLRAi3OqWxlM=',
-  },
-  {
     name: 'sarah_armstrong',
     ip: '10.10.10.81',
     private: '4N1djeSt0jz40CzAoG/dHcxMYqGwAOlGeMuXnpqQ/0o=',
@@ -350,12 +326,6 @@ wireguard_users: [
     public: 'rbdvmiZCPt56rLNrNGOprfYJGlBrTHTa+IgeBkB7I3s=',
   },
   {
-    name: 'sam_hedges',
-    ip: '10.10.10.86',
-    private: 'oF0fBULLMG92kqmqMpvpA/bxiZzqXUtwgXLr0eQYOFM=',
-    public: 'jj7PCTuGZ9TmKoVPk7RomFtA4SCV2IwXUD2QXW2+eiE=',
-  },
-  {
     name: 'joe_kurowski',
     ip: '10.10.10.87',
     private: '4PiCkK/TXa2ltvyfo2aehHy5VdhLQFfRRPQATDGuz2E=',
@@ -366,12 +336,6 @@ wireguard_users: [
     ip: '10.10.10.88',
     private: '4DS781yAVXH9g/q9S0gcC371rzhJShgG2yBySqNevFE=',
     public: 'Ee4jhYsGn3cjpL/DWd+MUM0rvrQMDZIL8Zkodt9oZic=',
-  },
-  {
-    name: 'jose_jimenez_mancha',
-    ip: '10.10.10.89',
-    private: 'aOzzXDYRZHQ5nbVrMu81VREG68Y54tOqmbvDepaugk4=',
-    public: 'gzR5cmPF89szPjqBNAlHsl4rlNXyaUp96uol8mONXFc=',
   },
   {
     name: 'navya_james',
@@ -420,5 +384,11 @@ wireguard_users: [
     ip: '10.10.10.97',
     private: 'iMEm2YOzzdjn9lQz4eg8+u0PxZDrFu6TsH7oY4IOf2k=',
     public: 'ZdCB6IWdmd8NoBenOcIZf1q3AGVTx7fb7aNKkPhSBh0=',
+  },
+  {
+    name: 'andy_tierney',
+    ip: '10.10.10.98',
+    private: 'wE3a7AmtJtO/V05OMB/K7rJHDCKm1OiZdETggOSpQH8=',
+    public: 'xjFEw4Uv6yIhndGphPyq0o4NFLHFWaSovvgi8W86EQw=',
   },
 ]
