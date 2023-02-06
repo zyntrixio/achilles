@@ -12,6 +12,8 @@ The intention is to use GitHub Actions to execute every 60 minutes to ensure all
 
 
 ## Project Setup
+1. Install Poetry: `curl -sSL https://install.python-poetry.org | python3 -`
+2. Run Ansible: `poetry run ./run.sh`
 
 ### Local Development
 
