@@ -391,4 +391,10 @@ wireguard_users: [
     private: 'wE3a7AmtJtO/V05OMB/K7rJHDCKm1OiZdETggOSpQH8=',
     public: 'xjFEw4Uv6yIhndGphPyq0o4NFLHFWaSovvgi8W86EQw=',
   },
+  {
+    name: 'chris_mitchell',
+    ip: '10.10.10.99',
+    private: '8EbZXiG3IZzXBHaYaprCTXkzNnv75Bly3a3gMVM2CEM=',
+    public: 'BSWo7M+fUdzQXgzZxUd4P8p/+IjGgEjJRVSPp+Sztlw=',
+  },
 ]
