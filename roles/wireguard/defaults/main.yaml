@@ -8,7 +8,7 @@ wireguard_exporter_checksum: 85db6cbc6a44b02247cebcd8d0f0fda4402be8516cb4ddb1c86
 
 wireguard_users: [
   {
-    name: 'alyson_jones',
+    name: 'ajones@bink.com',
     ip: '10.10.10.2',
     private: 'kKSz3ZHjisTGDyD3NBd860j1bxC2+PSiIT8a1EV+j0E=',
     public: 'A5NOXdBvqU68U4HzTZ6L18uy5asmN7QpcrRi+jIzLmo=',
