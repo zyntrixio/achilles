@@ -397,4 +397,10 @@ wireguard_users: [
     private: '8EbZXiG3IZzXBHaYaprCTXkzNnv75Bly3a3gMVM2CEM=',
     public: 'BSWo7M+fUdzQXgzZxUd4P8p/+IjGgEjJRVSPp+Sztlw=',
   },
+  {
+    name: 'joanne_randell',
+    ip: '10.10.10.100',
+    private: 'cFyUwdnbxa4SVlN+UJQ3tG+WWpE33OnYL797SSKoy3U=',
+    public: 'WsbFTtK+b5dv4DkVcmuI17YaE0CaxuYgYMGMVJeaJy4=',
+  },
 ]
