@@ -16,8 +16,8 @@ wireguard_users: [
   {
     name: 'anand_bhakta',
     ip: '10.10.10.3',
-    private: 'YIsj2GlVKxHvePY0CUTssfKt5WsMgeHc3I9kwQnTgmc=',
-    public: 'LspdN9LFsfd82t0MCtou7uLv+RkusI0zhip3TD6X+2c=',
+    private: 'WNQNfCx6lkwb5erK/D8gWscKCp9Fc6BV7fGX7ZhqvFY=',
+    public: 'UOa4s9b1ePJvYho7aFrsHLVKqI1Mk+/gV6uC1jB5zXY=',
   },
   {
     name: 'andy_hill',
@@ -254,12 +254,6 @@ wireguard_users: [
     public: 'quJ3R1qAsCXmkVdmMANG1IjG9AGmvQJgwXTVdcSZEH0=',
   },
   {
-    name: 'lora_rowley',
-    ip: '10.10.10.70',
-    private: 'GHLjo+w5aBP5qCrmDTFx521LbGLQOd3TfxhpHlUQhnE=',
-    public: 'GqytI7ZcfawSmohnoc4N5oaJY0O1qs9IodYqEkNWJ2o=',
-  },
-  {
     name: 'carmen_muntean',
     ip: '10.10.10.71',
     private: 'AMXqc5KXyacFRFyg6XGnTEj2PTBVxOVoxYclKeGeQ3o=',
@@ -284,22 +278,10 @@ wireguard_users: [
     public: 'pKXE1tElq2RQzNL5Ne+XM0K4+mwloSUFF3oSxteyWnA=',
   },
   {
-    name: 'andrew_preen',
-    ip: '10.10.10.76',
-    private: 'oA1FHHrLfTkSquSIKLdPzbX+6skm+/SrVHWWQxT651I=',
-    public: 'Tpx+P+RNEgfnaAb7uxnGnstNEumfETo7WigmA0pskhw=',
-  },
-  {
     name: 'neha_patil',
     ip: '10.10.10.77',
     private: 'OOzyyZ833AONp04HQzwPjpbSw2TvCOiXMvyEeRoynkY=',
     public: '8UGCNqqnySqdd31g/scA/MGf1jrQGAwnFTQrp9AJwmU=',
-  },
-  {
-    name: 'adam_bottley',
-    ip: '10.10.10.78',
-    private: 'WKAI4mYy9WMN9ap4ozG0Po732z61woGECmmzlQpecXg=',
-    public: 'LSVNfUlgOO6a2hk3ZlBWcMSlCq+OhDXQwKvD6ZcQgjo=',
   },
   {
     name: 'sarah_armstrong',
@@ -348,18 +330,6 @@ wireguard_users: [
     ip: '10.10.10.91',
     private: 'aNQgD0+ekkwr4SAunNCtCHMsdapQGpo7MdvjKEBINnI=',
     public: '3wRVrs7LHzEy5jghwyT3pUE5cbxDZNcf0FZUQrxKnBE=',
-  },
-  {
-    name: 'matt_lau',
-    ip: '10.10.10.92',
-    private: '6KJ7MGxuC0nU5OmdhDsXLerfbkYqsKG0SPCgbvgsRHI=',
-    public: 'Zw+a88lzKxnUd23JpgiIo3VZwz4tWC5E/ZhSCfY9500=',
-  },
-  {
-    name: 'andrew_waddell',
-    ip: '10.10.10.93',
-    private: 'ELzcrd1nzSk5UQ4N+M5988C/tn6Uu9lE7I/TN08WL2E=',
-    public: 'EPzUAjKES93RJSszrTAlwNKMYks1hcBezvI1AxegwlM=',
   },
   {
     name: 'ryan_fleming',
