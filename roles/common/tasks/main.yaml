@@ -1,8 +1,7 @@
 ---
-- name: Update and Upgrade Apt Packages
+- name: Update Apt Packages
   become: true
   apt:
-    upgrade: true
     update_cache: true
   retries: 3
 
