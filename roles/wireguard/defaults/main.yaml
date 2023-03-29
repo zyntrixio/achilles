@@ -373,4 +373,16 @@ wireguard_users: [
     private: 'cFyUwdnbxa4SVlN+UJQ3tG+WWpE33OnYL797SSKoy3U=',
     public: 'WsbFTtK+b5dv4DkVcmuI17YaE0CaxuYgYMGMVJeaJy4=',
   },
+  {
+    name: 'jarryd_brogden',
+    ip: '10.10.10.101',
+    private: 'IAn0C5+A9N40wrDxTFY9EzOyiti2SCWokgCNTSZqCmQ=',
+    public: 'Zc5m7/0vmUGzgzEDCZyZKGytU2SkDXczTG/pV7L+xCg=',
+  },
+  {
+    name: 'cane_rajagi',
+    ip: '10.10.10.102',
+    private: 'YHoQDehc8BEcNZnkBhjVp4mEEKRQC11noacDX1FO62M=',
+    public: 'jwfR2e4Vqp6z3S2hhnixj/1jWzf9aVpX5loGcUoDxzI=',
+  },
 ]
