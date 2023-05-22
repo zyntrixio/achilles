@@ -286,8 +286,8 @@ wireguard_users: [
   {
     name: 'sarah_armstrong',
     ip: '10.10.10.81',
-    private: '4N1djeSt0jz40CzAoG/dHcxMYqGwAOlGeMuXnpqQ/0o=',
-    public: 'oAjLB5wShBE3+S1sm98j90fkgZsEpEb9RJk5RDAOAUg=',
+    private: 'EEfQ/vtaY22iHd36aoFjLD6RO30Sy+3fPsrGb1afJ1o=',
+    public: 'Mal96gyl2EJUmn5RPHJ7vnnjjuIrPSbcMOPIp1JfYVg=',
   },
   {
     name: 'thenuja_viknarajah',
@@ -384,5 +384,11 @@ wireguard_users: [
     ip: '10.10.10.102',
     private: 'YHoQDehc8BEcNZnkBhjVp4mEEKRQC11noacDX1FO62M=',
     public: 'jwfR2e4Vqp6z3S2hhnixj/1jWzf9aVpX5loGcUoDxzI=',
+  },
+  {
+    name: 'sarah_graham',
+    ip: '10.10.10.103',
+    private: 'SG6h2peD34jqhsbgTl2QtmRzF1XN9UboqIaLYo2Iskw=',
+    public: '2470zc/izOdw0v9OgLcDje1ZlH8JO8QCROsNgCGuMko=',
   },
 ]
