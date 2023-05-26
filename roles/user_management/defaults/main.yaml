@@ -89,5 +89,9 @@ users_sftp: [
     name: binktest_dev_hermes_barclays,
     id: 4506,
     ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCuqR1EarVpxolYA8/jncHSZJ2c63clp+ygYn5M4i2N5gPH2L3JaDme8ZJ+8k7soq1QgxJMDHZ9yYDFCQpCg/VeLPY4Ve6FbOMOyM3vEkesls2KmkKqer8uwBRUufqH4NlTmKT2jZZiP65ODyo8Ssv3tQF0vaGiatg030XjhPZDmtNIFWV1VEFgclSzhFvugrY+HcckyJiUoWc1w7yYUzhnJb+PRhj5BaohbffD1VEQfgmjEDnaryFbdltaEa4Oe+tu0l6JVVtW7Z5nMuKBzEgr37PCpRyJPPtromVDK8gFZ+SFyEjiOpWcMcC2V3J7m1jlGNj8Snyuaz1N6nHOjqx
+  }, {
+    name: binktest_perf,
+    id: 4507,
+    ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE7flM8/ch7o38qTdEE79dV+eJ4gjP1/6wBVdtoFzb6x
   }
 ]
