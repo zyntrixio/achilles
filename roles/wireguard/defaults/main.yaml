@@ -88,8 +88,8 @@ wireguard_users: [
   {
     name: 'francesco_milani',
     ip: '10.10.10.16',
-    private: 'OJGWdTCGQsyw295zjGzhUsBimdj72aMPlcxpco64EFY=',
-    public: '24KVlPHGdOc6q1jS0pn/9PdBiwUH5au91ZeL4QHEsQ0=',
+    private: '4BM0PpkmwSi5ybRM/qLjBY1Z0rxyx+QLQhgxOCN4A0Y=',
+    public: 'BudHbO0FRCcfz0pnlC5l9EDujsElvIY2u77EWPhJkX8=',
   },
   {
     name: 'greta_simanauskaite',
