@@ -391,4 +391,10 @@ wireguard_users: [
     private: 'SG6h2peD34jqhsbgTl2QtmRzF1XN9UboqIaLYo2Iskw=',
     public: '2470zc/izOdw0v9OgLcDje1ZlH8JO8QCROsNgCGuMko=',
   },
+  {
+    name: 'enoch_hankombo',
+    ip: '10.10.10.104',
+    private: '6AYzP5pIeOoai2pJ59OPu0XILYYXAhwV6H4LTihWtFU=',
+    public: 'fZk3qgPQUb1+IH9M68hjb5oVqpOtqPTpPzuFX8z0i30=',
+  },
 ]
