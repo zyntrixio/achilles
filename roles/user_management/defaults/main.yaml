@@ -33,15 +33,6 @@ users_sftp: [
       slug: scheme/iceland
     }
   }, {
-    name: viator,
-    id: 4002,
-    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJLUDH/VUPhfUN0hiz7DDEkuKNQTmu2iW3mdmvA/z/ESB+zLh5kid21u27zjeKH5xGKHEkHjz8cGdXQ4FM5YpDEEXTwIyWkxkbHgeC+K5Dn1HCJVk/GiWnh65HKDBwVa5stsdq8LyWxK9hm+enZNy14UWUBPEx4AaX9zX7rsUXO9wCvT19LLb72MgGaIGSgQcLjqXZcsEq11617NNK35bJl+tu7m+kJpDuXwQ1ML211S2JM8fk2un8Ndihd/w3LqaVPMINz2wGtEL1OxWcJRP1ZXLWc516FWQvKWxdPLrVVHIoEhOtrLj2J3ttd9o7P6WryXUhnYolPdwgOD1DSPsE59SDQVzyr1vgEy27h370qw10R8VNIak44RgGHKn1jwcnHUzsc1qWWtYU26bhF5vwFOrS8hs1/11GuLy3o3Gb4e2OhsQiUQJp6LH5BnT8PjZVyB1Fsbz9O3LW6r45pI3+ECcPrjfTuVgq1niQ9EkR2hhQXb4oNqDB+JsBsUV/AcM=,
-    upload: {
-      conn_string: DefaultEndpointsProtocol=https;BlobEndpoint=https://uksouthprod89hg.blob.core.windows.net/;AccountName=uksouthprod89hg;AccountKey=oVolSXZ/5p3KgIzlEp19qw5nMA9qLkuTJHSM5e3cK7QY0oVWWG91ZAjfiTTC+7hL78fyWKOToALp+AStvmB2kA==,
-      container: carina-imports,
-      slug: viator
-    }
-  }, {
     name: trenette-dev,
     id: 4200,
     ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwjW5zg1mK+j+BZT/uCpFcjOhNcT8RnzDAuG92+ndE6,
