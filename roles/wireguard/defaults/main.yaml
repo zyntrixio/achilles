@@ -80,12 +80,6 @@ wireguard_users: [
     public: 'TzqRRnCg9rlnDn3cx41HKqoEOiyKClavtashDb0jjBI=',
   },
   {
-    name: 'enoch_hankombo',
-    ip: '10.10.10.15',
-    private: 'EItrCp1fwTR2agLq81fATJIq1Cc1m6HxqvT34NkHm3g=',
-    public: 'v9AbAi6ISjTVPkOeXLWr+WfyCONv6M8cdVbBSRbyaD8=',
-  },
-  {
     name: 'francesco_milani',
     ip: '10.10.10.16',
     private: '4BM0PpkmwSi5ybRM/qLjBY1Z0rxyx+QLQhgxOCN4A0Y=',
@@ -148,8 +142,8 @@ wireguard_users: [
   {
     name: 'paul_batty',
     ip: '10.10.10.32',
-    private: 'KIqySv/ymDZjDrissRH1oL2TCnVE/4FgPDBihlwYQVA=',
-    public: 'hFumF/dW46KgqYKL1EZ/WsaE93PW2Ds/7y0Psq+FmnE=',
+    private: 'MIv5T3HvwLWZ91YcuOaMN9iOc/Z8xSA0jo1PIlPGL3k=',
+    public: 'unWGvIoUuLwfyYo2ikRPONP5c4oEg7k3ihTYRZD6lnQ=',
   },
   {
     name: 'srikalyani_kotha',
