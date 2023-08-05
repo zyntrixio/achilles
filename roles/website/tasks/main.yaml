@@ -1,0 +1,75 @@
+---
+- name: Install Essentials
+  apt:
+    state: latest
+    update_cache: true
+    pkg:
+      - nginx
+      - ca-certificates
+      - certbot
+      - python3-certbot-nginx
+      - apt-transport-https
+      - python3
+      - python3-pip
+      - htop
+      - cron
+      - php-fpm
+      - php-curl
+      - php-fpm
+      - php-gd
+      - php-intl
+      - php-mbstring
+      - php-mysql
+      - php-soap
+      - php-xml
+      - php-xmlrpc
+      - php-zip
+      - mariadb-client
+      - mariadb-server
+
+- name: Request bink.com Certificate
+  command: certbot certonly --nginx --agree-tos --cert-name 'bink.com' -d 'bink.com' -d 'www.bink.com' -m 'devops@bink.com'
+  args:
+    creates: /etc/letsencrypt/live/bink.com/privkey.pem
+
+- name: Request rc.bink.com Certificate
+  command: certbot certonly --nginx --agree-tos --cert-name 'rc.bink.com' -d 'rc.bink.com' -m 'devops@bink.com'
+  args:
+    creates: /etc/letsencrypt/live/rc.bink.com/privkey.pem
+
+- name: Setup Website Directories
+  file:
+    path: "{{item.path}}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+  with_items:
+    - path: /var/www/bink.com
+    - path: /var/www/rc.bink.com
+
+- name: Setup NGINX Config
+  copy:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+    mode: "0644"
+  with_items:
+    - src: files/bink.com.conf
+      dest: /etc/nginx/sites-enabled/bink.com.conf
+    - src: files/rc.bink.com.conf
+      dest: /etc/nginx/sites-enabled/rc.bink.com.conf
+
+- name: reload nginx with new config
+  shell: nginx -s reload
+
+- name: certbot renewal cronjob
+  cron:
+    special_time: daily
+    name: "{{ item.name }}"
+    user: root
+    job: "{{ item.job }}"
+  with_items:
+    - name: certbot-renew
+      job: "certbot certonly --nginx --cert-name 'bink.com' -d 'bink.com' -d 'www.bink.com' --deploy-hook 'nginx -s reload'"
+    - name: certbot-renew-rc
+      job: "certbot certonly --nginx --cert-name 'rc.bink.com' -d 'rc.bink.com' --deploy-hook 'nginx -s reload'"

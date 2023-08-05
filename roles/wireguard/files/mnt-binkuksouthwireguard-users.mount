@@ -1,5 +1,0 @@
-[Mount]
-What=//binkuksouthwireguard.file.core.windows.net/users
-Where=/mnt/binkuksouthwireguard/users
-Options=username=binkuksouthwireguard,password=qBs+ImzxTO6PO4rUdazlVbWh156QPV7XTIKN/vvptXNb9E711KbGwOGBcN4pF47JUvVy8QpLfvpL+AStNwQMLQ==,file_mode=0644,serverino
-Type=cifs

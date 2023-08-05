@@ -1,0 +1,128 @@
+---
+- name: Update Apt Packages
+  apt:
+    update_cache: true
+  retries: 3
+
+- name: Add core packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - curl
+      - htop
+      - zsh
+      - tcpdump
+      - nano
+      - vim
+      - openssh-server
+      - openssh-client
+      - libpam-google-authenticator
+
+- name: Remove Disabled Users
+  user:
+    name: '{{ item }}'
+    state: absent
+    remove: true 
+  loop: '{{ users_disabled }}'
+
+- name: Set Password Ageing Max Days
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^PASS_MAX_DAYS'
+    line: PASS_MAX_DAYS 99999
+
+- name: Set Password Ageing Min Days
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^PASS_MIN_DAYS'
+    line: PASS_MIN_DAYS 0
+
+- name: Set Password Ageing Warning Days
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^PASS_WARN_AGE'
+    line: PASS_WARN_AGE 7
+
+- name: add pam.d file
+  copy:
+    src: pam.d_sudo
+    dest: /etc/pam.d/sudo
+
+- name: Create Group for Active Users
+  group:
+    name: '{{ item.name }}'
+    state: present
+  loop: '{{ users_active }}'
+
+- name: Create Active Users
+  user:
+    name: '{{ item.name }}'
+    uid: '{{ item.id }}'
+    shell: /bin/zsh
+    create_home: true
+    groups: sudo,{{ item.name }}
+    home: /home/{{ item.name }}
+  loop: '{{ users_active }}'
+
+- name: Change Home Directory Permissions
+  file:
+    dest: /home/{{ item.name }}
+    mode: '0750'
+  loop: '{{ users_active }}'
+
+- name: Create .ssh Dir
+  file:
+    path: /home/{{ item.name }}/.ssh
+    state: directory
+    owner: '{{ item.name }}'
+    group: '{{ item.name }}'
+    mode: '0700'
+  loop: '{{ users_active }}'
+
+- name: Create Config File
+  copy:
+    dest: /home/{{ item.name }}/.ssh/config
+    owner: '{{ item.name }}'
+    group: '{{ item.name }}'
+    mode: '0600'
+    content: |
+      Host *
+      ServerAliveInterval 10
+  loop: '{{ users_active }}'
+
+- name: Create Authorised Key Files
+  get_url:
+    url: https://github.com/{{ item.github_username }}.keys
+    dest: /home/{{ item.name }}/.ssh/authorized_keys
+    owner: '{{ item.name }}'
+    group: '{{ item.name }}'
+    mode: '0600'
+  loop: '{{ users_active }}'
+
+- name: Add .zshrc File
+  copy:
+    src: .zshrc
+    dest: /home/{{ item.name }}/.zshrc
+    owner: '{{ item.name }}'
+    group: '{{ item.name }}'
+    mode: '0644'
+  loop: '{{ users_active }}'
+
+- name: Add Google Authenticator File
+  template:
+    src: google_authenticator.j2
+    dest: /home/{{ item.name }}/.google_authenticator
+    owner: '{{ item.name }}'
+    group: '{{ item.name }}'
+    mode: '0600'
+  vars:
+    seed: '{{ item.otpseed }}'
+  loop: '{{ users_active }}'
+
+- name: Add .zshrc for Root User
+  copy:
+    src: .zshrc
+    dest: /root/.zshrc
+    owner: root
+    group: root
+    mode: '0644'

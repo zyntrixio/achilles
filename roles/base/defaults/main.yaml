@@ -1,0 +1,20 @@
+users_disabled: [chris_latham, terry_cain, tom_winchester, daniel_hodgson]
+
+users_active: [
+  {
+    name: chris_pressland,
+    id: 2001,
+    github_username: cpressland,
+    otpseed: GBJD6AVBLPTMWB56UYLCUAF6EI
+  }, {
+    name: nathan_read,
+    id: 2002,
+    github_username: nathancread93,
+    otpseed: ZEWB5TGS7MVJHF5QS7VVWA5XTI
+  }, {
+    name: thenuja_viknarajah,
+    id: 2003,
+    github_username: thenu97,
+    otpseed: WQ6Q4X57WFPVE5D4CXLUFFXMD4
+  }
+]

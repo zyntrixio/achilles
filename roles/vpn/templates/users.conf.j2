@@ -1,0 +1,9 @@
+[Interface]
+PrivateKey = {{ private }}
+Address = {{ address }}/24, fd42:42:42::{{address.split(".")[-1]}}/64
+DNS = 45.90.28.34, 45.90.30.34, 2a07:a8c0::58:38ce, 2a07:a8c1::58:38ce
+
+[Peer]
+PublicKey = {{ srv_public }}
+EndPoint = {{ srv_endpoint }}:{{ srv_port }}
+AllowedIPs = 0.0.0.0/0, ::/0

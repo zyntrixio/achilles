@@ -1,28 +1,12 @@
 ---
-- name: Configure VMs
-  hosts: all
-  become: true
-  roles:
-    - role: common
-    - role: prometheus
-    - role: user_management
-    - role: cis
-
-- name: Wireguard
+- name: vpn
   hosts: vpn
-  become: true
   roles:
-    - role: wireguard
+    - role: base
+    - role: vpn
 
-- name: RabbitMQ
-  hosts: rabbitmq
-  become: true
+- name: website
+  hosts: website
   roles:
-    - role: rabbitmq
-
-- name: ARA
-  hosts: ara
-  become: true
-  roles:
-    - role: docker
-    - role: ara
+    - role: base
+    - role: website

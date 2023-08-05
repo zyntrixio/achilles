@@ -1,0 +1,9 @@
+---
+- name: sshd
+  systemd:
+    name: sshd
+    state: restarted
+    daemon_reload: true
+
+- name: reload systemctl
+  command: systemctl daemon-reload

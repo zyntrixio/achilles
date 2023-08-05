@@ -1,0 +1,5 @@
+[Mount]
+What=//{{ storage_account_name }}.file.core.windows.net/users
+Where=/mnt/{{ storage_account_name }}/users
+Options=username={{ storage_account_name }},password={{ storage_account_key }},file_mode=0644,serverino
+Type=cifs

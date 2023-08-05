@@ -1,0 +1,12 @@
+---
+- name: restart wireguard
+  systemd:
+    name: wg-quick@wg0.service
+    state: restarted
+    daemon_reload: true
+
+- name: restart automount
+  systemd:
+    name: mnt-{{ storage_account_name }}-users.automount
+    state: restarted
+    daemon_reload: true
