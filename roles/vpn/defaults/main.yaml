@@ -242,8 +242,8 @@ wireguard_users: [
   {
     name: 'navya_james',
     ip: '10.10.10.90',
-    private: 'gEQnqvin+2YmoiX4y4Br3jQPgzJ5++8543vDBl2jvW0=',
-    public: '2IpzsJcpNZ40CgvqEBGklrRifjVVLTToF6ljwAHYFCQ=',
+    private: 'SDU1yL/OzIOJCswBcfiTy2woFBanpHzJn7MNulCIA1g=',
+    public: '44lwzodF6zQeS2ed/wNvgX+x2CW1dIe6Y75cqxf3XQk=',
   },
   {
     name: 'kristian_krastev',
@@ -310,5 +310,11 @@ wireguard_users: [
     ip: '10.10.10.105',
     private: '+GwQU4Mkd8ztQMgsydMOMt2cvDj6uRuotWBRCFXfF2o=',
     public: '5QHSdbbmLUj33289H2G+jROVwLKHOHy9JGzc8eV7kjI=',
+  },
+  {
+    name: 'joseph_lindsay',
+    ip: '10.10.10.106',
+    private: 'kH3QwswBV2f8fG64QXfmK7lOCpjkzf2yUxVSC64Mn2E=',
+    public: 'jh9IVNXfbPT3DWDnuoipWf478Vt0SCXrPdH+YUE5XFM=',
   },
 ]
