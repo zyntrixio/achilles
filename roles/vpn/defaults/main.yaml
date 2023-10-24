@@ -317,4 +317,10 @@ wireguard_users: [
     private: 'kH3QwswBV2f8fG64QXfmK7lOCpjkzf2yUxVSC64Mn2E=',
     public: 'jh9IVNXfbPT3DWDnuoipWf478Vt0SCXrPdH+YUE5XFM=',
   },
+  {
+    name: 'calum_brown',
+    ip: '10.10.10.107',
+    private: 'KBFOpPAl7MNR2+1S547FfGOI+TjqHxbebZ+2sQeLMV0=',
+    public: 'JMfEig9bTouEHnWL+K2gaW/NwbjfJiSpuE1C0Q4iK0g='
+  },
 ]
