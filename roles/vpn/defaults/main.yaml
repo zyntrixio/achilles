@@ -6,12 +6,6 @@ wireguard_server_port: 51820
 
 wireguard_users: [
   {
-    name: 'alyson_jones',
-    ip: '10.10.10.2',
-    private: 'kKSz3ZHjisTGDyD3NBd860j1bxC2+PSiIT8a1EV+j0E=',
-    public: 'A5NOXdBvqU68U4HzTZ6L18uy5asmN7QpcrRi+jIzLmo=',
-  },
-  {
     name: 'anand_bhakta',
     ip: '10.10.10.3',
     private: 'WNQNfCx6lkwb5erK/D8gWscKCp9Fc6BV7fGX7ZhqvFY=',
@@ -54,12 +48,6 @@ wireguard_users: [
     public: '9AjzShRGSvyytAaMjdQartbabt/AaWG5D4rVuJOt0AQ=',
   },
   {
-    name: 'daniel_hodgson',
-    ip: '10.10.10.13',
-    private: 'sMCgGlFuBf8kZkaVDrs/YJEE1oJK5eLdRlfcI6or8nc=',
-    public: 'TzqRRnCg9rlnDn3cx41HKqoEOiyKClavtashDb0jjBI=',
-  },
-  {
     name: 'francesco_milani',
     ip: '10.10.10.16',
     private: '4BM0PpkmwSi5ybRM/qLjBY1Z0rxyx+QLQhgxOCN4A0Y=',
@@ -76,12 +64,6 @@ wireguard_users: [
     ip: '10.10.10.24',
     private: 'EH/P3NB4eSWPJjO98/4I6eKdSnIMYt/HW+7aSCPrOHc=',
     public: 'bCQ3+3c3JIOdCJ5E7yc2bHlRlcAqx0kK0tUlIyddLHc=',
-  },
-  {
-    name: 'martin_marsh',
-    ip: '10.10.10.25',
-    private: 'KMDaE2j+8ArBeosZniJd7YHwGPJfgNciWTTbquSHNG8=',
-    public: 'FSJNS6Jm2fUIzkdoYbenUo6JUioV0EbXK6BhLKvfwwk=',
   },
   {
     name: 'max_woodhams',
@@ -114,22 +96,10 @@ wireguard_users: [
     public: 'unWGvIoUuLwfyYo2ikRPONP5c4oEg7k3ihTYRZD6lnQ=',
   },
   {
-    name: 'stewart_perrygrove',
-    ip: '10.10.10.36',
-    private: 'ICeIDsgnFZJESi+YT8YUIiHPu6Mu//CDkyRoMkt1wEg=',
-    public: 'W1cwAu3VRIZINQLbx6ttIlYZc8QOPfI782zCRBpBmUQ=',
-  },
-  {
     name: 'susanne_king',
     ip: '10.10.10.37',
     private: 'qG5HdPRcHqQOWsCFJfvEdk0nMQU22GeSwQuMW8debXU=',
     public: 'fcO6diaZLmKy/r7N0AdGdHdrilPMV9m9zzErUxXp12k=',
-  },
-  {
-    name: 'tony_truong',
-    ip: '10.10.10.41',
-    private: 'oDKqxoxanbrWxpnnA9TSz+8+XI4YYVANaWE2f4zlflY=',
-    public: 'Ii0fHkGGb6ph57nZapiv2ZUt3Vp2kmWrMn5HrDr2hEM=',
   },
   {
     name: 'mikayla_rowe',
@@ -148,18 +118,6 @@ wireguard_users: [
     ip: '10.10.10.48',
     private: 'wFkWgoCqhsOtzJv8nX9an7Q0oNfj2adql9e0YIlj72Y=',
     public: 'TLbGWlPjUEoCEM97bDo51eKRVC8VfHwbFSUswj28yxg=',
-  },
-  {
-    name: 'lukie_Kang',
-    ip: '10.10.10.53',
-    private: 'ICJyxdoeaI7NPamInI+uCAwxc9B+5Q7H8FCpQaPUE3o=',
-    public: 'su5erMwfCiPDPpYg8H4Jg6DpTJuJj4QnTpScUMNsmDg=',
-  },
-  {
-    name: 'michal_jozwiak',
-    ip: '10.10.10.54',
-    private: 'qPM+GQjNaELC39JpTwtUxQ19mGn7GLQlOirvjAEVn0Q=',
-    public: 'bdlrw65trBzXrmzAaYwIZN7sUWm8EBasETfYYKRSZBc=',
   },
   {
     name: 'jake_woodhams',
@@ -210,18 +168,6 @@ wireguard_users: [
     public: 'XfzaCqcpo9UUHBeArb1j24oLrbXYqypqB2vL+K72URU=',
   },
   {
-    name: 'haffi_mazhar',
-    ip: '10.10.10.75',
-    private: 'UHeuq+7C5vlxXPtkw1+G8SonbSUTUh68gfdm0c5TNHI=',
-    public: 'pKXE1tElq2RQzNL5Ne+XM0K4+mwloSUFF3oSxteyWnA=',
-  },
-  {
-    name: 'sarah_armstrong',
-    ip: '10.10.10.81',
-    private: 'EEfQ/vtaY22iHd36aoFjLD6RO30Sy+3fPsrGb1afJ1o=',
-    public: 'Mal96gyl2EJUmn5RPHJ7vnnjjuIrPSbcMOPIp1JfYVg=',
-  },
-  {
     name: 'thenuja_viknarajah',
     ip: '10.10.10.83',
     private: 'iNjBRbGjO/cRagYShPujC9KmxQzCLxSEci7cTM/fHF0=',
@@ -246,12 +192,6 @@ wireguard_users: [
     public: '44lwzodF6zQeS2ed/wNvgX+x2CW1dIe6Y75cqxf3XQk=',
   },
   {
-    name: 'kristian_krastev',
-    ip: '10.10.10.91',
-    private: 'aNQgD0+ekkwr4SAunNCtCHMsdapQGpo7MdvjKEBINnI=',
-    public: '3wRVrs7LHzEy5jghwyT3pUE5cbxDZNcf0FZUQrxKnBE=',
-  },
-  {
     name: 'ryan_fleming',
     ip: '10.10.10.94',
     private: 'iNBhej3X5WOKtEKlY5z7uWgGu8AK0/ttJK2fkGFFy30=',
@@ -270,22 +210,10 @@ wireguard_users: [
     public: 'ZdCB6IWdmd8NoBenOcIZf1q3AGVTx7fb7aNKkPhSBh0=',
   },
   {
-    name: 'andy_tierney',
-    ip: '10.10.10.98',
-    private: 'wE3a7AmtJtO/V05OMB/K7rJHDCKm1OiZdETggOSpQH8=',
-    public: 'xjFEw4Uv6yIhndGphPyq0o4NFLHFWaSovvgi8W86EQw=',
-  },
-  {
     name: 'chris_mitchell',
     ip: '10.10.10.99',
     private: '8EbZXiG3IZzXBHaYaprCTXkzNnv75Bly3a3gMVM2CEM=',
     public: 'BSWo7M+fUdzQXgzZxUd4P8p/+IjGgEjJRVSPp+Sztlw=',
-  },
-  {
-    name: 'joanne_randell',
-    ip: '10.10.10.100',
-    private: 'cFyUwdnbxa4SVlN+UJQ3tG+WWpE33OnYL797SSKoy3U=',
-    public: 'WsbFTtK+b5dv4DkVcmuI17YaE0CaxuYgYMGMVJeaJy4=',
   },
   {
     name: 'jarryd_brogden',
