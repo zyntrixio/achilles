@@ -9,3 +9,6 @@ uksouth-vpn ansible_host="vpn.gb.bink.com" storage_account_name="binkuksouthvpn"
 
 [website]
 uksouth-wesbite ansible_host="www.bink.com"
+
+[tailscale]
+uksouth-tailscale ansible_host="tailscale.gb.bink.com"

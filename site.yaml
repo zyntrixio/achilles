@@ -10,3 +10,8 @@
   roles:
     - role: base
     - role: website
+
+- name: tailscale
+  hosts: tailscale
+  roles:
+    - role: base
