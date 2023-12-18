@@ -137,4 +137,10 @@ wireguard_users: [
     private: 'KBFOpPAl7MNR2+1S547FfGOI+TjqHxbebZ+2sQeLMV0=',
     public: 'JMfEig9bTouEHnWL+K2gaW/NwbjfJiSpuE1C0Q4iK0g='
   },
+  {
+    name: 'francesco_milani',
+    ip: '10.10.10.16',
+    private: '4BM0PpkmwSi5ybRM/qLjBY1Z0rxyx+QLQhgxOCN4A0Y=',
+    public: 'BudHbO0FRCcfz0pnlC5l9EDujsElvIY2u77EWPhJkX8=',
+  },
 ]
