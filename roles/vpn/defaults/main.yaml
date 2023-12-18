@@ -36,64 +36,16 @@ wireguard_users: [
     public: 'Y8kiXt0l8shUg3yLFKdpyEpRG+lMHBxNS/w9zXAY3yE=',
   },
   {
-    name: 'chris_latham',
-    ip: '10.10.10.10',
-    private: 'iIdmZdh8pAqxHV8q7PQ+Sm3l+QkykZlkmyPGbcpp0nc=',
-    public: 'JwKKfzmsbTyicOVJ1nEKelHpYycGJpLhpR4RJvwOxSI=',
-  },
-  {
-    name: 'chris_pressland',
-    ip: '10.10.10.11',
-    private: 'WMlcJnP3xS7LmM1DmnAPdziU4e6qpugLfJrHKMDGw3k=',
-    public: '9AjzShRGSvyytAaMjdQartbabt/AaWG5D4rVuJOt0AQ=',
-  },
-  {
-    name: 'francesco_milani',
-    ip: '10.10.10.16',
-    private: '4BM0PpkmwSi5ybRM/qLjBY1Z0rxyx+QLQhgxOCN4A0Y=',
-    public: 'BudHbO0FRCcfz0pnlC5l9EDujsElvIY2u77EWPhJkX8=',
-  },
-  {
-    name: 'kashim_aziz',
-    ip: '10.10.10.22',
-    private: 'wF/tQXe/kWLxsR1u5bYIFOmvcgJW2Y/xdP58INsyE2o=',
-    public: 'YWscmE2CBD9vNNfJSGOweDzT8Hp4Grak+BG+YPAZbFU=',
-  },
-  {
     name: 'mark_swarbrick',
     ip: '10.10.10.24',
     private: 'EH/P3NB4eSWPJjO98/4I6eKdSnIMYt/HW+7aSCPrOHc=',
     public: 'bCQ3+3c3JIOdCJ5E7yc2bHlRlcAqx0kK0tUlIyddLHc=',
   },
   {
-    name: 'max_woodhams',
-    ip: '10.10.10.26',
-    private: 'eEPWgOEALfJhVABtBx6qEDndVDga4AU7+cOPchfOuVo=',
-    public: 'XqtGhZlOnVMAOoUxmx7MgzGVT3pdBfLfiQmUzUARUjM=',
-  },
-  {
-    name: 'michael_morar',
-    ip: '10.10.10.27',
-    private: 'QGNk8NT84+05DHdE0FajvSmp+aZpu5vtHO6WBcUYZHc=',
-    public: 'HMZYsop9ku5tTzKp09BKq6M8udVMFVGh/qGmRtRUEnU=',
-  },
-  {
-    name: 'mick_latham',
-    ip: '10.10.10.28',
-    private: 'ENtKUWRoRZB3bF8tJMzX3TUxOKbapIHZWLbbc0udv10=',
-    public: 'hZhTG/QGic6Stp690VsBWRqKAf8PA81GkQbZJIVoXmI=',
-  },
-  {
     name: 'navin_odera',
     ip: '10.10.10.29',
     private: 'cIozyOM2CqE3ETkf58z505bRyGsfE+7AdQwxA7ckKWA=',
     public: 'uGJ8geQVYbOYtkn+kj2IvcmdUEyIKzLy2ZMren4UTnk=',
-  },
-  {
-    name: 'paul_batty',
-    ip: '10.10.10.32',
-    private: 'MIv5T3HvwLWZ91YcuOaMN9iOc/Z8xSA0jo1PIlPGL3k=',
-    public: 'unWGvIoUuLwfyYo2ikRPONP5c4oEg7k3ihTYRZD6lnQ=',
   },
   {
     name: 'susanne_king',
@@ -108,12 +60,6 @@ wireguard_users: [
     public: '5rw3f/W+N6LETqf0eIbZgs/XfRKtpz7IPX0a/VCFZzE=',
   },
   {
-    name: 'nathan_read',
-    ip: '10.10.10.45',
-    private: '2Ll641g6O/zzYnbcqRblxrIdStomdRpPvQ72chfLuWM=',
-    public: '+jn8R121W65HXzVgCA/Xm2tT9bVrWXCoUcLHdBLyBRY=',
-  },
-  {
     name: 'sam_bransden',
     ip: '10.10.10.48',
     private: 'wFkWgoCqhsOtzJv8nX9an7Q0oNfj2adql9e0YIlj72Y=',
@@ -124,30 +70,6 @@ wireguard_users: [
     ip: '10.10.10.57',
     private: '+LtGgxru94LEeX+JHfCgD2yAyvDv0diaDl4AfT4woUM=',
     public: 'ZsBcrIfm5VUjAvqSKMZSKweg+GwpbxqqxWb3kUEpml4=',
-  },
-  {
-    name: 'jess_jones',
-    ip: '10.10.10.63',
-    private: 'SCbXwlgwkyR4CS+AAQqsmBZYT4xwTxP5CdS0OZLw/kQ=',
-    public: 'e4LQxJOBtsfS4m/EY1sqIbj+j1pkzNj9NL+QparyXEs=',
-  },
-  {
-    name: 'lewis_hamilton',
-    ip: '10.10.10.67',
-    private: 'YJ1D9FxziFVcuFrjMA23EjPDcNStQkMqxsH5iq9PAl8=',
-    public: 'DZcROMP8xTy6sEVM8XKbO1v18kU7Gvt/df7zbOA52hA=',
-  },
-  {
-    name: 'kishan_patel',
-    ip: '10.10.10.68',
-    private: 'yCRSL+FSAfTQ0rzFTOg1+hdRerEGVgC8CBxIhWB1VnY=',
-    public: '7hNKS25b5pr3fmKlYQ0FiTEL2tJiJRQMneLviPzMHGs=',
-  },
-  {
-    name: 'carla_gouws',
-    ip: '10.10.10.69',
-    private: 'WCfnop76YCWzfubIkisPt6A2QQ7lDPrcuMOQYySOyUg=',
-    public: 'quJ3R1qAsCXmkVdmMANG1IjG9AGmvQJgwXTVdcSZEH0=',
   },
   {
     name: 'carmen_muntean',
@@ -162,18 +84,6 @@ wireguard_users: [
     public: 'xqM38scA9rWS50/gdCuxY9og0/lIcsEI45I2okG+u34=',
   },
   {
-    name: 'chris_morrow',
-    ip: '10.10.10.73',
-    private: 'sHMgVhq9RB7wghoRcx/4oSHA+bDhNrY4vg5vEU35vUQ=',
-    public: 'XfzaCqcpo9UUHBeArb1j24oLrbXYqypqB2vL+K72URU=',
-  },
-  {
-    name: 'thenuja_viknarajah',
-    ip: '10.10.10.83',
-    private: 'iNjBRbGjO/cRagYShPujC9KmxQzCLxSEci7cTM/fHF0=',
-    public: 'N5jqIUOXp6ow1jkldETEtKDZiMxQnnmob6u29K9kVUU=',
-  },
-  {
     name: 'bilal_leadbitter',
     ip: '10.10.10.84',
     private: 'cAOqmPSsFG7AqU3LY0pmQaINPoKEtXBW2Q3jMZxSkWA=',
@@ -186,34 +96,16 @@ wireguard_users: [
     public: 'soIA19jgdK8wbdDqbAa00o+hU/FXe4OpyQ/I9qkpEnU=',
   },
   {
-    name: 'navya_james',
-    ip: '10.10.10.90',
-    private: 'SDU1yL/OzIOJCswBcfiTy2woFBanpHzJn7MNulCIA1g=',
-    public: '44lwzodF6zQeS2ed/wNvgX+x2CW1dIe6Y75cqxf3XQk=',
-  },
-  {
     name: 'ryan_fleming',
     ip: '10.10.10.94',
     private: 'iNBhej3X5WOKtEKlY5z7uWgGu8AK0/ttJK2fkGFFy30=',
     public: 'V5hyln99VwGD2wIAD9cdtY4rZ7Iv3uT25vVzm7xnqU4=',
   },
   {
-    name: 'joshua_irving',
-    ip: '10.10.10.95',
-    private: 'OF5yJkNI8HcnQavz+0txO/ePomVrk7mVWAmen8o1pE4=',
-    public: '1HcTLcr/uHkzDEIG7yT62BXf3S7vpF4v7An+PwdfuVc=',
-  },
-  {
     name: 'lucia_codrean',
     ip: '10.10.10.97',
     private: 'iMEm2YOzzdjn9lQz4eg8+u0PxZDrFu6TsH7oY4IOf2k=',
     public: 'ZdCB6IWdmd8NoBenOcIZf1q3AGVTx7fb7aNKkPhSBh0=',
-  },
-  {
-    name: 'chris_mitchell',
-    ip: '10.10.10.99',
-    private: '8EbZXiG3IZzXBHaYaprCTXkzNnv75Bly3a3gMVM2CEM=',
-    public: 'BSWo7M+fUdzQXgzZxUd4P8p/+IjGgEjJRVSPp+Sztlw=',
   },
   {
     name: 'jarryd_brogden',
@@ -238,12 +130,6 @@ wireguard_users: [
     ip: '10.10.10.105',
     private: '+GwQU4Mkd8ztQMgsydMOMt2cvDj6uRuotWBRCFXfF2o=',
     public: '5QHSdbbmLUj33289H2G+jROVwLKHOHy9JGzc8eV7kjI=',
-  },
-  {
-    name: 'joseph_lindsay',
-    ip: '10.10.10.106',
-    private: 'kH3QwswBV2f8fG64QXfmK7lOCpjkzf2yUxVSC64Mn2E=',
-    public: 'jh9IVNXfbPT3DWDnuoipWf478Vt0SCXrPdH+YUE5XFM=',
   },
   {
     name: 'calum_brown',
